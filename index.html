@@ -11,20 +11,34 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        /* Menggunakan font Inter sebagai default */
         body {
             font-family: 'Inter', sans-serif;
+            background-color: #0f172a; /* bg-slate-900 */
         }
-        /* Style untuk transisi antar layar */
-        .screen {
+        .screen, .modal-overlay {
             display: none;
+            animation: fadeIn 0.4s ease-out;
         }
-        .screen.active {
+        .screen.active, .modal-overlay.active {
             display: flex;
         }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.98) translateY(10px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        .modal-content {
+            animation: slideUp 0.3s ease-out;
+        }
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .review-container::-webkit-scrollbar { width: 8px; }
+        .review-container::-webkit-scrollbar-track { background: #1e293b; }
+        .review-container::-webkit-scrollbar-thumb { background: #38bdf8; border-radius: 4px; }
     </style>
 </head>
-<body class="bg-slate-900 text-white">
+<body class="text-white">
 
     <!-- Kontainer Utama Aplikasi -->
     <div id="app-container" class="min-h-screen flex flex-col items-center justify-center p-4">
@@ -33,74 +47,91 @@
         <div id="start-screen" class="screen active w-full">
             <div class="text-center bg-slate-800 p-8 rounded-2xl shadow-2xl max-w-2xl w-full border border-slate-700 mx-auto">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-16 h-16 mx-auto text-sky-400 mb-4">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v11.494m-9-5.747h18" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.182a2.25 2.25 0 01.634 1.618V16.5a2.25 2.25 0 01-2.25 2.25H5.25a2.25 2.25 0 01-2.25-2.25v-2.672c0-.94.616-1.767 1.5-2.092L6.75 10.5a.75.75 0 01.75.75v1.682zM12 6.253v11.494m-9-5.747h18" />
                 </svg>
                 <h1 class="text-4xl md:text-5xl font-bold mb-2">Latihan UAS</h1>
                 <p class="text-2xl text-slate-300 mb-6">Sistem Basis Data</p>
-                <p class="text-slate-400 mb-8">
-                    Uji pemahaman Anda dengan 100 soal pilihan ganda berdasarkan materi kuliah. Klik tombol di bawah untuk memulai.
-                </p>
-                <button id="start-button" class="bg-sky-500 hover:bg-sky-600 text-white font-bold py-3 px-8 rounded-lg text-xl transition-all duration-300 transform hover:scale-105 shadow-lg">
-                    Mulai Latihan
-                </button>
-            </div>
-        </div>
-
-        <!-- 2. Layar Kuis (Quiz Screen) -->
-        <div id="quiz-screen" class="screen w-full">
-            <div class="bg-slate-800 p-6 md:p-8 rounded-2xl shadow-2xl max-w-3xl w-full border border-slate-700 mx-auto">
-                <!-- Header Kuis -->
-                <div class="mb-6">
-                    <p id="question-counter" class="text-sky-400 font-semibold">Soal 1 dari 100</p>
-                    <div class="w-full bg-slate-700 rounded-full mt-2 h-3">
-                        <div id="progress-bar" class="bg-sky-500 h-3 rounded-full transition-all duration-300" style="width: 1%;"></div>
-                    </div>
-                </div>
-                <!-- Pertanyaan -->
-                <h2 id="question-text" class="text-xl md:text-2xl font-medium mb-6 leading-relaxed"></h2>
-                <!-- Pilihan Jawaban -->
-                <div id="options-container" class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-                    <!-- Pilihan jawaban akan dimasukkan oleh JavaScript -->
-                </div>
-                <!-- Tombol Selanjutnya -->
-                <div class="text-right">
-                    <button id="next-button" disabled class="bg-sky-500 text-white font-bold py-3 px-10 rounded-lg text-lg transition-all duration-300 disabled:bg-slate-600 disabled:cursor-not-allowed disabled:text-slate-400 hover:bg-sky-600">
-                        Selanjutnya
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- 3. Layar Hasil (Result Screen) -->
-        <div id="result-screen" class="screen w-full">
-             <div class="text-center bg-slate-800 p-8 rounded-2xl shadow-2xl max-w-2xl w-full border border-slate-700 mx-auto">
-                <h2 class="text-3xl font-bold mb-4">Hasil Latihan Selesai!</h2>
-                <div id="feedback-container" class="flex items-center justify-center gap-2 text-2xl font-bold mb-4">
-                    <!-- Feedback akan dimasukkan oleh JavaScript -->
-                </div>
-                <p id="score-text" class="text-xl text-slate-300 mb-2"></p>
-                <div class="w-full bg-slate-700 rounded-full h-8 my-6">
-                    <div id="score-bar" class="bg-sky-500 h-8 rounded-full flex items-center justify-center text-sm font-medium" style="width: 0%;">
-                        0%
-                    </div>
-                </div>
-                <button id="restart-button" class="bg-sky-500 hover:bg-sky-600 text-white font-bold py-3 px-8 rounded-lg text-xl transition-all duration-300 transform hover:scale-105 shadow-lg">
-                    Coba Lagi
-                </button>
+                <p class="text-slate-400 mb-8">Uji pemahaman Anda dengan soal-soal pilihan ganda yang dibagi per paket.</p>
+                <button id="start-button" class="bg-sky-500 hover:bg-sky-600 text-white font-bold py-3 px-8 rounded-lg text-xl transition-all duration-300 transform hover:scale-105 shadow-lg">Mulai</button>
             </div>
         </div>
         
+        <!-- 2. Layar Pemilihan Paket Soal -->
+        <div id="packet-selection-screen" class="screen w-full">
+            <div class="text-center bg-slate-800 p-8 rounded-2xl shadow-2xl max-w-3xl w-full border border-slate-700 mx-auto">
+                <h2 class="text-3xl font-bold mb-8">Pilih Mode Latihan</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <button data-packet="1" class="packet-button bg-gradient-to-br from-teal-500 to-cyan-600 hover:from-teal-600 hover:to-cyan-700 text-white font-bold py-6 px-4 rounded-lg text-lg transition-all duration-300 transform hover:-translate-y-1 shadow-lg">Paket 1 <span class="block text-sm font-normal">(Soal 1-50)</span></button>
+                    <button data-packet="2" class="packet-button bg-gradient-to-br from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white font-bold py-6 px-4 rounded-lg text-lg transition-all duration-300 transform hover:-translate-y-1 shadow-lg">Paket 2 <span class="block text-sm font-normal">(Soal 51-100)</span></button>
+                    <button data-packet="all" class="packet-button bg-gradient-to-br from-rose-500 to-red-600 hover:from-rose-600 hover:to-red-700 text-white font-bold py-6 px-4 rounded-lg text-lg transition-all duration-300 transform hover:-translate-y-1 shadow-lg">Acak Semua Soal <span class="block text-sm font-normal">(100 Soal)</span></button>
+                </div>
+                 <button id="back-to-start-button" class="mt-8 text-sky-400 hover:text-sky-300 transition-colors">‹ Kembali ke Menu Utama</button>
+            </div>
+        </div>
+
+        <!-- 3. Layar Kuis (Quiz Screen) -->
+        <div id="quiz-screen" class="screen w-full">
+            <div class="bg-slate-800 p-6 md:p-8 rounded-2xl shadow-2xl max-w-3xl w-full border border-slate-700 mx-auto">
+                <div class="flex justify-between items-center mb-6">
+                    <p id="question-counter" class="text-sky-400 font-semibold"></p>
+                    <div id="timer" class="bg-slate-700 text-lg font-bold text-yellow-400 px-4 py-1 rounded-md">00:00</div>
+                </div>
+                <div class="w-full bg-slate-700 rounded-full h-3 mb-6"><div id="progress-bar" class="bg-sky-500 h-3 rounded-full transition-all duration-300" style="width: 0%;"></div></div>
+                <h2 id="question-text" class="text-xl md:text-2xl font-medium mb-6 leading-relaxed"></h2>
+                <div id="options-container" class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8"></div>
+                <div class="text-right">
+                    <button id="next-button" disabled class="bg-sky-500 text-white font-bold py-3 px-10 rounded-lg text-lg transition-all duration-300 disabled:bg-slate-600 disabled:cursor-not-allowed disabled:text-slate-400 hover:bg-sky-600">Selanjutnya</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. Layar Hasil (Result Screen) -->
+        <div id="result-screen" class="screen w-full">
+             <div class="text-center bg-slate-800 p-8 rounded-2xl shadow-2xl max-w-2xl w-full border border-slate-700 mx-auto">
+                <h2 class="text-3xl font-bold mb-4">Hasil Latihan Selesai!</h2>
+                <div id="feedback-container" class="flex items-center justify-center gap-2 text-2xl font-bold mb-4"></div>
+                <p id="score-text" class="text-xl text-slate-300 mb-2"></p>
+                <div class="w-full bg-slate-700 rounded-full h-8 my-6"><div id="score-bar" class="bg-sky-500 h-8 rounded-full flex items-center justify-center text-sm font-medium" style="width: 0%;">0%</div></div>
+                <div class="flex flex-col md:flex-row gap-4 justify-center">
+                    <button id="review-button" class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-8 rounded-lg text-xl transition-all duration-300 transform hover:scale-105 shadow-lg">Lihat Pembahasan</button>
+                    <button id="restart-button" class="bg-sky-500 hover:bg-sky-600 text-white font-bold py-3 px-8 rounded-lg text-xl transition-all duration-300 transform hover:scale-105 shadow-lg">Coba Lagi</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 5. Layar Pembahasan (Review Screen) -->
+        <div id="review-screen" class="screen w-full">
+            <div class="bg-slate-800 p-6 md:p-8 rounded-2xl shadow-2xl max-w-4xl w-full border border-slate-700 mx-auto flex flex-col" style="height: 90vh;">
+                <h2 class="text-3xl font-bold mb-6 text-center">Pembahasan Soal</h2>
+                <div id="review-container" class="review-container flex-grow overflow-y-auto pr-4 space-y-6"></div>
+                <div class="text-center mt-6">
+                    <button id="back-to-result-button" class="bg-sky-500 hover:bg-sky-600 text-white font-bold py-3 px-8 rounded-lg text-xl transition-all duration-300 transform hover:scale-105 shadow-lg">Kembali ke Hasil</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Modal Konfirmasi -->
+        <div id="confirmation-modal" class="modal-overlay fixed inset-0 bg-black bg-opacity-70 items-center justify-center">
+            <div class="modal-content bg-slate-800 p-8 rounded-2xl shadow-2xl max-w-sm w-full border border-slate-700 text-center">
+                <h3 id="modal-title" class="text-2xl font-bold mb-4"></h3>
+                <p id="modal-text" class="text-slate-300 mb-6"></p>
+                <div class="flex gap-4 justify-center">
+                    <button id="modal-cancel-button" class="bg-slate-600 hover:bg-slate-700 text-white font-bold py-2 px-6 rounded-lg transition-colors">Batal</button>
+                    <button id="modal-confirm-button" class="bg-sky-500 hover:bg-sky-600 text-white font-bold py-2 px-6 rounded-lg transition-colors">Ya, Mulai</button>
+                </div>
+            </div>
+        </div>
+
         <footer class="text-center mt-8 text-slate-500 text-sm absolute bottom-4">
             <p>Dibuat berdasarkan materi PDF Anda.</p>
             <p>Universitas Bina Sarana Informatika &copy; 2025</p>
         </footer>
-
     </div>
 
     <script>
         // --- Data Soal dalam Format JSON ---
         const quizQuestions = [
-            // Set 1
+            // Soal 1-50
             { id: 1, question: "Dalam bahasa Query Formal, terdapat dua dasar pembentukan bahasa, yaitu Aljabar Relasional dan...", options: ["Kalkulus Prosedural", "Kalkulus Relasional", "Aljabar Proposisional", "Kalkulus Logika"], answer: "Kalkulus Relasional" },
             { id: 2, question: "Bahasa query yang didasarkan pada Aljabar Relasional merupakan bahasa query yang bersifat...", options: ["Non-Prosedural", "Prosedural", "Deklaratif", "Fungsional"], answer: "Prosedural" },
             { id: 3, question: "Operator Aljabar Relasional yang digunakan untuk pemilihan tupel atau record adalah...", options: ["Project (π)", "Join (⋈)", "Restrict (σ)", "Divide (÷)"], answer: "Restrict (σ)" },
@@ -151,7 +182,7 @@
             { id: 48, question: "`SELECT * FROM Mahasiswa;` adalah contoh perintah dari...", options: ["DDL", "DML", "DCL", "TCL"], answer: "DML" },
             { id: 49, question: "Operasi `REVOKE` digunakan untuk...", options: ["Memberikan hak akses kepada pengguna", "Menarik kembali hak akses yang telah diberikan", "Membuat pengguna baru", "Menghapus pengguna"], answer: "Menarik kembali hak akses yang telah diberikan" },
             { id: 50, question: "Proses mengimpor data dari file lain ke dalam tabel database dapat dilakukan dengan perintah...", options: ["SELECT INTO OUTFILE", "EXPORT", "LOAD", "RECOVER TABLE"], answer: "LOAD" },
-            // Set 2
+            // Soal 51-100
             { id: 51, question: "Manakah dari berikut ini yang merupakan operator tambahan (additional operasional) dalam Aljabar Relasional?", options: ["Restrict (σ)", "Project (π)", "Set Intersection (∩)", "Union (∪)"], answer: "Set Intersection (∩)" },
             { id: 52, question: "Berdasarkan contoh tabel di dokumen, jika kita ingin menampilkan semua mahasiswa yang tinggal di 'DEPOK' dan berjenis kelamin 'LAKI-LAKI', ekspresi Aljabar Relasional yang tepat adalah...", options: ["σ Alamat='DEPOK' ∨ J_KEL='LAKI-LAKI' (MAHASISWA)", "σ Alamat='DEPOK' ∧ J_KEL='LAKI-LAKI' (MAHASISWA)", "π NAMA_MHS (σ Alamat='DEPOK' (MAHASISWA))", "σ Alamat='DEPOK' (MAHASISWA) - σ J_KEL='PEREMPUAN' (MAHASISWA)"], answer: "σ Alamat='DEPOK' ∧ J_KEL='LAKI-LAKI' (MAHASISWA)" },
             { id: 53, question: "Operasi Aljabar Relasional yang digunakan untuk menggabungkan operasi cartesian product dengan operasi selection dengan suatu kriteria disebut...", options: ["Natural Join", "Theta Join", "Union", "Division"], answer: "Theta Join" },
@@ -207,18 +238,37 @@
         // --- Variabel dan Elemen DOM ---
         let currentQuestionIndex = 0;
         let score = 0;
-        let shuffledQuestions = [];
+        let selectedPacketQuestions = [];
+        let userAnswers = [];
         let selectedAnswer = null;
+        let timerInterval = null;
 
-        const startScreen = document.getElementById('start-screen');
-        const quizScreen = document.getElementById('quiz-screen');
-        const resultScreen = document.getElementById('result-screen');
+        const screens = {
+            start: document.getElementById('start-screen'),
+            packetSelection: document.getElementById('packet-selection-screen'),
+            quiz: document.getElementById('quiz-screen'),
+            result: document.getElementById('result-screen'),
+            review: document.getElementById('review-screen')
+        };
+        
+        const modal = {
+            overlay: document.getElementById('confirmation-modal'),
+            title: document.getElementById('modal-title'),
+            text: document.getElementById('modal-text'),
+            confirmButton: document.getElementById('modal-confirm-button'),
+            cancelButton: document.getElementById('modal-cancel-button')
+        };
 
         const startButton = document.getElementById('start-button');
+        const packetButtons = document.querySelectorAll('.packet-button');
         const nextButton = document.getElementById('next-button');
         const restartButton = document.getElementById('restart-button');
+        const reviewButton = document.getElementById('review-button');
+        const backToResultButton = document.getElementById('back-to-result-button');
+        const backToStartButton = document.getElementById('back-to-start-button');
 
         const questionCounter = document.getElementById('question-counter');
+        const timerDisplay = document.getElementById('timer');
         const progressBar = document.getElementById('progress-bar');
         const questionText = document.getElementById('question-text');
         const optionsContainer = document.getElementById('options-container');
@@ -226,45 +276,94 @@
         const scoreText = document.getElementById('score-text');
         const scoreBar = document.getElementById('score-bar');
         const feedbackContainer = document.getElementById('feedback-container');
+        const reviewContainer = document.getElementById('review-container');
 
         // --- Fungsi-Fungsi Aplikasi ---
 
-        /**
-         * Memulai kuis, mengacak soal, dan menampilkan layar kuis.
-         */
-        function startQuiz() {
-            startScreen.classList.remove('active');
-            quizScreen.classList.add('active');
+        function showScreen(screenId) {
+            Object.values(screens).forEach(screen => screen.classList.remove('active'));
+            screens[screenId].classList.add('active');
+        }
+        
+        function showConfirmationModal(title, text, onConfirm) {
+            modal.title.innerText = title;
+            modal.text.innerText = text;
+            modal.overlay.classList.add('active');
             
-            // Reset state
-            currentQuestionIndex = 0;
-            score = 0;
-            selectedAnswer = null;
-            
-            // Acak urutan soal
-            shuffledQuestions = [...quizQuestions].sort(() => Math.random() - 0.5);
-            
-            loadQuestion();
+            modal.confirmButton.onclick = () => {
+                modal.overlay.classList.remove('active');
+                onConfirm();
+            };
+            modal.cancelButton.onclick = () => {
+                modal.overlay.classList.remove('active');
+            };
         }
 
-        /**
-         * Memuat pertanyaan dan pilihan jawaban saat ini.
-         */
+        function selectPacket(packetType) {
+            let duration = 0;
+            let packetName = '';
+            
+            if (packetType === '1') {
+                selectedPacketQuestions = quizQuestions.slice(0, 50);
+                duration = 60 * 60; // 60 menit
+                packetName = 'Paket 1';
+            } else if (packetType === '2') {
+                selectedPacketQuestions = quizQuestions.slice(50, 100);
+                duration = 60 * 60; // 60 menit
+                packetName = 'Paket 2';
+            } else { // 'all'
+                selectedPacketQuestions = [...quizQuestions].sort(() => Math.random() - 0.5);
+                duration = 120 * 60; // 120 menit
+                packetName = 'Semua Soal';
+            }
+            
+            showConfirmationModal(
+                `Mulai ${packetName}?`,
+                `Anda akan memiliki waktu ${duration / 60} menit untuk menyelesaikan kuis ini. Apakah Anda siap?`,
+                () => startQuiz(duration)
+            );
+        }
+        
+        function startQuiz(duration) {
+            showScreen('quiz');
+            currentQuestionIndex = 0;
+            score = 0;
+            userAnswers = [];
+            selectedAnswer = null;
+            startTimer(duration);
+            loadQuestion();
+        }
+        
+        function startTimer(duration) {
+            let timeLeft = duration;
+            clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                const minutes = Math.floor(timeLeft / 60);
+                let seconds = timeLeft % 60;
+                seconds = seconds < 10 ? '0' + seconds : seconds;
+                
+                timerDisplay.innerText = `${minutes}:${seconds}`;
+                
+                if (--timeLeft < 0) {
+                    clearInterval(timerInterval);
+                    showResult(); // Waktu habis
+                }
+            }, 1000);
+        }
+
         function loadQuestion() {
-            // Reset pilihan sebelumnya
             selectedAnswer = null;
             nextButton.disabled = true;
 
-            const currentQuestion = shuffledQuestions[currentQuestionIndex];
+            const currentQuestion = selectedPacketQuestions[currentQuestionIndex];
+            const totalQuestions = selectedPacketQuestions.length;
             
-            // Update UI
-            questionCounter.innerText = `Soal ${currentQuestionIndex + 1} dari ${shuffledQuestions.length}`;
-            const progressPercentage = ((currentQuestionIndex + 1) / shuffledQuestions.length) * 100;
+            questionCounter.innerText = `Soal ${currentQuestionIndex + 1} dari ${totalQuestions}`;
+            const progressPercentage = ((currentQuestionIndex + 1) / totalQuestions) * 100;
             progressBar.style.width = `${progressPercentage}%`;
             
             questionText.innerText = currentQuestion.question;
 
-            // Hapus pilihan lama dan buat yang baru
             optionsContainer.innerHTML = '';
             currentQuestion.options.forEach((option, index) => {
                 const button = document.createElement('button');
@@ -275,48 +374,34 @@
             });
         }
 
-        /**
-         * Menangani pemilihan jawaban.
-         * @param {string} option - Teks jawaban yang dipilih.
-         * @param {HTMLElement} buttonElement - Elemen tombol yang diklik.
-         */
         function handleAnswerSelect(option, buttonElement) {
             selectedAnswer = option;
             nextButton.disabled = false;
-
-            // Hapus highlight dari semua tombol
             Array.from(optionsContainer.children).forEach(btn => {
                 btn.className = 'p-4 rounded-lg text-left w-full transition-all duration-200 border-2 bg-slate-700 border-slate-600 hover:bg-slate-600 hover:border-slate-500';
             });
-
-            // Tambahkan highlight ke tombol yang dipilih
             buttonElement.className = 'p-4 rounded-lg text-left w-full transition-all duration-200 border-2 bg-sky-500 border-sky-400 scale-105 shadow-lg';
         }
 
-        /**
-         * Memproses jawaban dan lanjut ke soal berikutnya atau tampilkan hasil.
-         */
         function handleNextQuestion() {
-            if (selectedAnswer === shuffledQuestions[currentQuestionIndex].answer) {
+            userAnswers.push(selectedAnswer);
+            if (selectedAnswer === selectedPacketQuestions[currentQuestionIndex].answer) {
                 score++;
             }
 
-            if (currentQuestionIndex < shuffledQuestions.length - 1) {
+            if (currentQuestionIndex < selectedPacketQuestions.length - 1) {
                 currentQuestionIndex++;
                 loadQuestion();
             } else {
+                clearInterval(timerInterval);
                 showResult();
             }
         }
 
-        /**
-         * Menampilkan layar hasil akhir.
-         */
         function showResult() {
-            quizScreen.classList.remove('active');
-            resultScreen.classList.add('active');
-
-            const percentage = Math.round((score / shuffledQuestions.length) * 100);
+            showScreen('result');
+            const totalQuestions = selectedPacketQuestions.length;
+            const percentage = Math.round((score / totalQuestions) * 100);
             let feedback = {
                 text: "Perlu Belajar Lagi",
                 color: "text-red-400",
@@ -332,23 +417,58 @@
             feedbackContainer.innerHTML = `${feedback.icon} <span>${feedback.text}</span>`;
             feedbackContainer.className = `flex items-center justify-center gap-2 text-2xl font-bold mb-4 ${feedback.color}`;
             
-            scoreText.innerHTML = `Anda berhasil menjawab <span class="text-sky-400 font-bold text-2xl">${score}</span> dari <span class="font-bold text-2xl">${shuffledQuestions.length}</span> soal.`;
+            scoreText.innerHTML = `Anda berhasil menjawab <span class="text-sky-400 font-bold text-2xl">${score}</span> dari <span class="font-bold text-2xl">${totalQuestions}</span> soal.`;
             scoreBar.style.width = `${percentage}%`;
             scoreBar.innerText = `${percentage}%`;
         }
+        
+        function showReview() {
+            showScreen('review');
+            reviewContainer.innerHTML = '';
+            selectedPacketQuestions.forEach((question, index) => {
+                const userAnswer = userAnswers[index];
+                const isCorrect = userAnswer === question.answer;
+                
+                const reviewItem = document.createElement('div');
+                reviewItem.className = `p-4 rounded-lg border-l-4 ${isCorrect ? 'border-green-500 bg-slate-700/50' : 'border-red-500 bg-slate-700/50'}`;
+                
+                const icon = isCorrect 
+                    ? `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-400 inline-block mr-2" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>`
+                    : `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-400 inline-block mr-2" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>`;
 
-        /**
-         * Memulai ulang kuis dari awal.
-         */
-        function restartQuiz() {
-            resultScreen.classList.remove('active');
-            startScreen.classList.add('active');
+                reviewItem.innerHTML = `
+                    <p class="font-bold text-lg mb-2">Soal ${question.id}: ${question.question}</p>
+                    <p class="text-sm ${isCorrect ? 'text-green-400' : 'text-red-400'}">${icon}Jawaban Anda: <span class="font-semibold">${userAnswer || 'Tidak dijawab'}</span></p>
+                    ${!isCorrect ? `<p class="text-sm text-sky-400 mt-1"><span class="font-bold">Jawaban Benar:</span> ${question.answer}</p>` : ''}
+                `;
+                reviewContainer.appendChild(reviewItem);
+            });
         }
 
         // --- Event Listeners ---
-        startButton.addEventListener('click', startQuiz);
+        startButton.addEventListener('click', () => showScreen('packetSelection'));
+        backToStartButton.addEventListener('click', () => showScreen('start'));
+        
+        packetButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                const packet = e.currentTarget.getAttribute('data-packet');
+                selectPacket(packet);
+            });
+        });
+
         nextButton.addEventListener('click', handleNextQuestion);
-        restartButton.addEventListener('click', restartQuiz);
+        restartButton.addEventListener('click', () => {
+            showConfirmationModal(
+                'Ulangi Latihan?',
+                'Anda akan kembali ke halaman pemilihan paket. Progres saat ini akan hilang.',
+                () => showScreen('packetSelection')
+            );
+        });
+        reviewButton.addEventListener('click', showReview);
+        backToResultButton.addEventListener('click', () => showScreen('result'));
+        
+        // Initial call
+        showScreen('start');
 
     </script>
 </body>
