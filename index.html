@@ -91,6 +91,10 @@
           box-shadow: 0 2px 16px 0 rgba(30, 41, 59, 0.18);
         }
       }
+      #quiz-back-button:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
     </style>
   </head>
   <body class="text-white">
@@ -182,6 +186,28 @@
           class="bg-slate-800 p-6 md:p-8 rounded-2xl shadow-2xl max-w-3xl w-full border border-slate-700 mx-auto"
         >
           <div class="flex justify-between items-center mb-6">
+            <button
+              id="quiz-back-button"
+              class="text-sky-400 hover:text-sky-300 font-semibold flex items-center gap-1 transition-colors"
+              type="button"
+            >
+              <!-- Icon panah kiri -->
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6 inline"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M15 19l-7-7 7-7"
+                />
+              </svg>
+              Kembali
+            </button>
             <p id="question-counter" class="text-sky-400 font-semibold"></p>
             <div
               id="timer"
@@ -1395,6 +1421,7 @@
         "back-to-result-button"
       );
       const backToStartButton = document.getElementById("back-to-start-button");
+      const quizBackButton = document.getElementById("quiz-back-button");
 
       const questionCounter = document.getElementById("question-counter");
       const timerDisplay = document.getElementById("timer");
@@ -1514,6 +1541,9 @@
           button.onclick = () => handleAnswerSelect(option, button);
           optionsContainer.appendChild(button);
         });
+
+        // Disable tombol kembali jika di soal pertama
+        quizBackButton.disabled = currentQuestionIndex === 0;
       }
 
       function handleAnswerSelect(option, buttonElement) {
@@ -1637,6 +1667,17 @@
       });
       reviewButton.addEventListener("click", showReview);
       backToResultButton.addEventListener("click", () => showScreen("result"));
+      quizBackButton.addEventListener("click", () => {
+        if (currentQuestionIndex > 0) {
+          currentQuestionIndex--;
+          // Hapus jawaban terakhir jika user sudah memilih
+          userAnswers.pop();
+          loadQuestion();
+        } else {
+          // Optional: Bisa beri feedback jika sudah di soal pertama
+          // Misal: alert("Sudah di soal pertama.");
+        }
+      });
 
       // Initial call
       showScreen("start");
