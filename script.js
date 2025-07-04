@@ -32,7 +32,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const backToResultButton = document.getElementById("back-to-result-button");
   const backToStartButton = document.getElementById("back-to-start-button");
   const quizBackButton = document.getElementById("quiz-back-button");
-  const surrenderButton = document.getElementById("surrender-button");
 
   const questionCounter = document.getElementById("question-counter");
   const timerDisplay = document.getElementById("timer");
@@ -109,28 +108,18 @@ document.addEventListener("DOMContentLoaded", () => {
     );
   }
 
-  function startQuiz(duration, resume = false) {
+  function startQuiz(duration) {
     showScreen("quiz");
-    if (!resume) {
-      currentQuestionIndex = 0;
-      score = 0;
-      userAnswers = [];
-      selectedAnswer = null;
-      window.quizStartTime = Date.now();
-    }
-    startTimer(duration, resume);
+    currentQuestionIndex = 0;
+    score = 0;
+    userAnswers = [];
+    selectedAnswer = null;
+    startTimer(duration);
     loadQuestion();
-    saveProgress();
   }
 
-  function startTimer(duration, resume = false) {
+  function startTimer(duration) {
     let timeLeft = duration;
-    if (resume && window.quizStartTime) {
-      const elapsed = Math.floor((Date.now() - window.quizStartTime) / 1000);
-      timeLeft = duration - elapsed;
-    } else {
-      window.quizStartTime = Date.now();
-    }
     clearInterval(timerInterval);
     timerInterval = setInterval(() => {
       const minutes = Math.floor(timeLeft / 60);
@@ -141,13 +130,13 @@ document.addEventListener("DOMContentLoaded", () => {
         clearInterval(timerInterval);
         showResult();
       }
-      saveProgress();
     }, 1000);
   }
 
   function loadQuestion() {
-    selectedAnswer = userAnswers[currentQuestionIndex] || null;
-    nextButton.disabled = !selectedAnswer;
+    selectedAnswer = null;
+    nextButton.disabled = true;
+
     const currentQuestion = selectedPacketQuestions[currentQuestionIndex];
     const totalQuestions = selectedPacketQuestions.length;
 
@@ -167,16 +156,11 @@ document.addEventListener("DOMContentLoaded", () => {
       )}.</span> ${option}`;
       button.className =
         "p-4 rounded-lg text-left w-full transition-all duration-200 border-2 bg-slate-700 border-slate-600 hover:bg-slate-600 hover:border-slate-500";
-      if (userAnswers[currentQuestionIndex] === option) {
-        button.className =
-          "p-4 rounded-lg text-left w-full transition-all duration-200 border-2 bg-sky-500 border-sky-400 scale-105 shadow-lg";
-      }
       button.onclick = () => handleAnswerSelect(option, button);
       optionsContainer.appendChild(button);
     });
 
     quizBackButton.disabled = currentQuestionIndex === 0;
-    saveProgress();
   }
 
   function handleAnswerSelect(option, buttonElement) {
@@ -188,8 +172,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     buttonElement.className =
       "p-4 rounded-lg text-left w-full transition-all duration-200 border-2 bg-sky-500 border-sky-400 scale-105 shadow-lg";
-    userAnswers[currentQuestionIndex] = option;
-    saveProgress();
   }
 
   function handleNextQuestion() {
@@ -201,7 +183,6 @@ document.addEventListener("DOMContentLoaded", () => {
       clearInterval(timerInterval);
       showResult();
     }
-    saveProgress();
   }
 
   function showResult() {
@@ -240,17 +221,6 @@ document.addEventListener("DOMContentLoaded", () => {
     scoreText.innerHTML = `Anda berhasil menjawab <span class="text-sky-400 font-bold text-2xl">${finalScore}</span> dari <span class="font-bold text-2xl">${totalQuestions}</span> soal.`;
     scoreBar.style.width = `${percentage}%`;
     scoreBar.innerText = `${percentage}%`;
-
-    // Simpan history
-    saveHistory(
-      window.selectedPacketType,
-      finalScore,
-      totalQuestions,
-      new Date().toLocaleString()
-    );
-    clearProgress();
-    // Panggil original showResult jika ada
-    if (typeof originalShowResult === "function") originalShowResult();
   }
 
   function showReview() {
@@ -312,55 +282,10 @@ document.addEventListener("DOMContentLoaded", () => {
         loadQuestion();
       }
     });
-    surrenderButton.addEventListener("click", () => {
-      showConfirmationModal(
-        "Menyerah?",
-        "Apakah Anda yakin ingin menyerah? Semua jawaban yang belum diisi akan dianggap kosong dan hasil langsung ditampilkan.",
-        () => {
-          clearInterval(timerInterval);
-          showResult();
-        }
-      );
-    });
-  }
-
-  // --- Helper untuk Local Storage Progress ---
-  function saveProgress() {
-    localStorage.setItem(
-      "quiz-progress",
-      JSON.stringify({
-        packetType: window.selectedPacketType,
-        currentQuestionIndex,
-        userAnswers,
-        selectedPacketQuestions,
-        timer: timerDisplay ? timerDisplay.innerText : "0:00",
-        startTime: window.quizStartTime,
-      })
-    );
-  }
-  function loadProgress() {
-    const data = localStorage.getItem("quiz-progress");
-    return data ? JSON.parse(data) : null;
-  }
-  function clearProgress() {
-    localStorage.removeItem("quiz-progress");
-  }
-
-  // --- Helper untuk History ---
-  function saveHistory(packetType, score, total, date) {
-    const history = JSON.parse(localStorage.getItem("quiz-history") || "[]");
-    history.unshift({ packetType, score, total, date });
-    localStorage.setItem("quiz-history", JSON.stringify(history));
-  }
-  function getHistory() {
-    return JSON.parse(localStorage.getItem("quiz-history") || "[]");
-  }
-  function clearHistory() {
-    localStorage.removeItem("quiz-history");
   }
 
   // --- Eksekusi Utama ---
-  fetch("/questions.json")
+  fetch("public/questions.json")
     .then((response) => {
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -370,9 +295,7 @@ document.addEventListener("DOMContentLoaded", () => {
     .then((data) => {
       quizQuestions = data;
       setupEventListeners();
-      showScreen("start");
-      renderContinueButton();
-      renderHistory();
+      showScreen("start"); // Tampilkan layar awal setelah semua siap
     })
     .catch((error) => {
       console.error("Gagal memuat file questions.json:", error);
