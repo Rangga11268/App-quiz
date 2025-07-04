@@ -360,7 +360,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // --- Eksekusi Utama ---
-  fetch("questions.json")
+  fetch("/questions.json")
     .then((response) => {
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
