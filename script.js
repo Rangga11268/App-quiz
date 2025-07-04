@@ -50,7 +50,9 @@ document.addEventListener("DOMContentLoaded", () => {
     Object.values(screens).forEach((screen) =>
       screen.classList.remove("active")
     );
-    screens[screenId].classList.add("active");
+    if (screens[screenId]) {
+      screens[screenId].classList.add("active");
+    }
   }
 
   function showConfirmationModal(title, text, onConfirm) {
@@ -112,7 +114,7 @@ document.addEventListener("DOMContentLoaded", () => {
     showScreen("quiz");
     currentQuestionIndex = 0;
     score = 0;
-    userAnswers = [];
+    userAnswers = new Array(selectedPacketQuestions.length).fill(null);
     selectedAnswer = null;
     startTimer(duration);
     loadQuestion();
@@ -206,7 +208,7 @@ document.addEventListener("DOMContentLoaded", () => {
       feedback = {
         text: "Luar Biasa!",
         color: "text-green-400",
-        icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M12 10.5c.99 0 1.875.315 2.625.831m-5.25 0A4.492 4.492 0 0112 10.5" /><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12c0 4.142-3.358 7.5-7.5 7.5s-7.5-3.358-7.5-7.5 3.358-7.5 7.5-7.5 7.5 3.358 7.5 7.5z" /></svg>`,
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75" /><circle cx="12" cy="12" r="9" /></svg>`,
       };
     } else if (percentage >= 70) {
       feedback = {

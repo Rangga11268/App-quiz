@@ -69,7 +69,7 @@
   },
   {
     "id": 9,
-    "question": "Dalam SQL, jenis JOIN yang hanya menggabungkan baris data dari dua tabel yang datanya bersesuaian (memiliki nilai kunci yang sama) adalah...",
+    "question": "Dalam SQL, jenis JOIN yang hanya menggabungkan baris data dari dua tabel yang datanya bersesuaian adalah...",
     "options": ["LEFT JOIN", "RIGHT JOIN", "FULL OUTER JOIN", "INNER JOIN"],
     "answer": "INNER JOIN"
   },
@@ -221,7 +221,7 @@
   },
   {
     "id": 26,
-    "question": "Perangkat lunak bantu untuk perancangan basis data yang dioptimalkan untuk MySQL yang dibahas dalam dokumen adalah...",
+    "question": "Perangkat lunak bantu untuk perancangan basis data yang dioptimalkan untuk MySQL adalah...",
     "options": [
       "SQL Server Management Studio",
       "Oracle SQL Developer",
@@ -243,7 +243,7 @@
   },
   {
     "id": 28,
-    "question": "Ketika sebuah transaksi membaca suatu record yang sudah dimodifikasi oleh transaksi lain tetapi belum di-commit, dan transaksi tersebut kemudian di-rollback, masalah ini disebut...",
+    "question": "Ketika sebuah transaksi membaca suatu record yang sudah dimodifikasi oleh transaksi lain tetapi belum di-commit, masalah ini disebut...",
     "options": [
       "Masalah Modifikasi Sementara (Uncommitted Update Problem)",
       "Masalah Kehilangan Modifikasi (Lost Update Problem)",
@@ -260,7 +260,7 @@
   },
   {
     "id": 30,
-    "question": "Jenis kunci (lock) yang memungkinkan pengguna membaca record tetapi tidak mengubahnya, dan pengguna lain juga dapat membacanya adalah...",
+    "question": "Jenis kunci (lock) yang memungkinkan pengguna dan pengguna lain membaca record tetapi tidak mengubahnya adalah...",
     "options": ["Exclusive (X)", "Primary (P)", "Shared (S)", "Read-only (R)"],
     "answer": "Shared (S)"
   },
@@ -289,7 +289,7 @@
   },
   {
     "id": 34,
-    "question": "Kegagalan fungsi perangkat keras yang menyebabkan hilangnya data pada volatile storage tetapi data pada non-volatile storage masih tetap ada disebut...",
+    "question": "Kegagalan fungsi perangkat keras yang menyebabkan hilangnya data pada volatile storage disebut...",
     "options": [
       "Logical Error",
       "System Error",
@@ -306,13 +306,13 @@
   },
   {
     "id": 36,
-    "question": "Cara yang diberikan pada seorang pemakai untuk mendapatkan model database yang sesuai dengan kebutuhan perorangan, yang juga merupakan mekanisme keamanan, adalah konsep...",
+    "question": "Cara yang diberikan pada seorang pemakai untuk mendapatkan model database yang sesuai dengan kebutuhan perorangan disebut...",
     "options": ["VIEW", "INDEX", "TRIGGER", "TABLE"],
     "answer": "VIEW"
   },
   {
     "id": 37,
-    "question": "Aturan integritas pada basis data relasional yang menyatakan bahwa tidak ada satu komponen kunci primer pun yang boleh bernilai kosong (null) adalah...",
+    "question": "Aturan yang menyatakan bahwa tidak ada satu komponen kunci primer pun yang boleh bernilai kosong (null) adalah...",
     "options": [
       "Integritas Referensi",
       "Integritas Domain",
@@ -345,7 +345,7 @@
   },
   {
     "id": 40,
-    "question": "Operator tambahan `NATURAL JOIN` adalah operasi yang menggabungkan...",
+    "question": "Operasi `NATURAL JOIN` adalah operasi yang menggabungkan...",
     "options": [
       "Operasi selection dan projection",
       "Operasi selection dan cartesian product pada kolom yang sama",
@@ -396,7 +396,7 @@
   },
   {
     "id": 46,
-    "question": "Dalam merancang relasi menggunakan DBDesigner, untuk membuat hubungan *many-to-many* antara dua tabel, tool tersebut secara otomatis akan...",
+    "question": "Dalam merancang relasi `many-to-many` di DBDesigner, tool tersebut secara otomatis akan...",
     "options": [
       "Menambahkan foreign key di kedua tabel",
       "Memunculkan tabel baru (tabel persimpangan)",
@@ -414,7 +414,7 @@
       "Semua data harus akurat dan valid",
       "Setiap foreign key harus merujuk ke primary key yang ada atau bernilai null"
     ],
-    "answer": "Setiap foreign key harus merujuk ke primary key yang ada atau bernilai null"
+    "answer": "Suatu domain dapat dipakai sebagai kunci primer jika merupakan atribut tunggal pada domain tersebut"
   },
   {
     "id": 48,
@@ -436,12 +436,17 @@
   {
     "id": 50,
     "question": "Proses mengimpor data dari file lain ke dalam tabel database dapat dilakukan dengan perintah...",
-    "options": ["SELECT INTO OUTFILE", "EXPORT", "LOAD", "RECOVER TABLE"],
-    "answer": "LOAD"
+    "options": [
+      "SELECT INTO OUTFILE",
+      "EXPORT",
+      "LOAD DATA INFILE",
+      "RECOVER TABLE"
+    ],
+    "answer": "LOAD DATA INFILE"
   },
   {
     "id": 51,
-    "question": "Manakah dari berikut ini yang merupakan operator tambahan (additional operasional) dalam Aljabar Relasional?",
+    "question": "Manakah dari berikut ini yang merupakan operator tambahan dalam Aljabar Relasional?",
     "options": [
       "Restrict (σ)",
       "Project (π)",
@@ -452,7 +457,7 @@
   },
   {
     "id": 52,
-    "question": "Berdasarkan contoh tabel di dokumen, jika kita ingin menampilkan semua mahasiswa yang tinggal di 'DEPOK' dan berjenis kelamin 'LAKI-LAKI', ekspresi Aljabar Relasional yang tepat adalah...",
+    "question": "Ekspresi Aljabar Relasional untuk menampilkan semua mahasiswa yang tinggal di 'DEPOK' dan berjenis kelamin 'LAKI-LAKI' adalah...",
     "options": [
       "σ Alamat='DEPOK' ∨ J_KEL='LAKI-LAKI' (MAHASISWA)",
       "σ Alamat='DEPOK' ∧ J_KEL='LAKI-LAKI' (MAHASISWA)",
@@ -463,7 +468,7 @@
   },
   {
     "id": 53,
-    "question": "Operasi Aljabar Relasional yang digunakan untuk menggabungkan operasi cartesian product dengan operasi selection dengan suatu kriteria disebut...",
+    "question": "Operasi Aljabar Relasional yang menggabungkan `cartesian product` dengan `selection` dengan suatu kriteria disebut...",
     "options": ["Natural Join", "Theta Join", "Union", "Division"],
     "answer": "Theta Join"
   },
@@ -472,33 +477,33 @@
     "question": "Dalam SQL, perintah `DROP DATABASE` akan...",
     "options": [
       "Menghapus tabel dari database",
-      "Menghapus seluruh database beserta tabel di dalamnya",
+      "Menghapus seluruh database beserta isinya",
       "Menghapus view dari database",
       "Menghapus indeks dari tabel"
     ],
-    "answer": "Menghapus seluruh database beserta tabel di dalamnya"
+    "answer": "Menghapus seluruh database beserta isinya"
   },
   {
     "id": 55,
-    "question": "Sintaks SQL untuk mengubah nama kolom `JKEL` menjadi `JENIS_KELAMIN` pada tabel Mahasiswa adalah...",
+    "question": "Sintaks SQL untuk mengubah nama kolom `Nfak` menjadi `NoFaktur` pada tabel `faktur` adalah...",
     "options": [
-      "ALTER TABLE Mahasiswa MODIFY JKEL JENIS_KELAMIN char(15);",
-      "ALTER TABLE Mahasiswa DROP JKEL;",
-      "ALTER TABLE Mahasiswa RENAME COLUMN JKEL TO JENIS_KELAMIN;",
-      "ALTER TABLE Mahasiswa CHANGE COLUMN JKEL JENIS_KELAMIN char(15);"
+      "ALTER TABLE faktur MODIFY COLUMN NoFaktur char(4);",
+      "ALTER TABLE faktur DROP COLUMN Nfak;",
+      "ALTER TABLE faktur RENAME COLUMN Nfak TO NoFaktur;",
+      "ALTER TABLE faktur CHANGE COLUMN Nfak NoFaktur char(4);"
     ],
-    "answer": "ALTER TABLE Mahasiswa CHANGE COLUMN JKEL JENIS_KELAMIN char(15);"
+    "answer": "ALTER TABLE faktur CHANGE COLUMN Nfak NoFaktur char(4);"
   },
   {
     "id": 56,
     "question": "Klausa `WITH CHECK OPTION` pada perintah `CREATE VIEW` berfungsi untuk...",
     "options": [
       "Memastikan view dibuat dengan benar",
-      "Memeriksa apakah data yang dimasukkan melalui view memenuhi kondisi view tersebut",
+      "Memeriksa apakah data yang diubah melalui view memenuhi kondisi view",
       "Mengecek duplikasi data pada view",
       "Memberikan opsi untuk menghapus view"
     ],
-    "answer": "Memeriksa apakah data yang dimasukkan melalui view memenuhi kondisi view tersebut"
+    "answer": "Memeriksa apakah data yang diubah melalui view memenuhi kondisi view"
   },
   {
     "id": 57,
@@ -513,7 +518,7 @@
   },
   {
     "id": 58,
-    "question": "Berdasarkan contoh tabel Nilai, query `SELECT * FROM Nilai WHERE MID >= 70 AND FINAL >= 75;` akan menghasilkan berapa baris?",
+    "question": "Query `SELECT * FROM Nilai WHERE MID >= 70 AND FINAL >= 75;` akan menghasilkan berapa baris?",
     "options": ["2 baris", "3 baris", "4 baris", "5 baris"],
     "answer": "3 baris"
   },
@@ -530,7 +535,7 @@
   },
   {
     "id": 60,
-    "question": "Jika tabel `tb_kota` di-`RIGHT JOIN` dengan tabel `tb_provinsi` (seperti contoh di slide 47), baris mana dari `tb_provinsi` yang akan muncul meskipun tidak memiliki padanan di `tb_kota`?",
+    "question": "Jika tabel `tb_kota` di-`RIGHT JOIN` dengan tabel `tb_provinsi`, provinsi mana yang akan muncul meskipun tidak punya padanan kota?",
     "options": ["DKI Jakarta", "Jawa Tengah", "Papua Barat", "Jawa Barat"],
     "answer": "Papua Barat"
   },
@@ -549,7 +554,7 @@
     "id": 62,
     "question": "Perintah `RECOVER TABLE MHS;` termasuk dalam kategori...",
     "options": [
-      "Data Definition Language (DML)",
+      "Data Definition Language (DDL)",
       "Data Access",
       "Auxiliary",
       "Data Integrity"
@@ -619,7 +624,7 @@
   },
   {
     "id": 69,
-    "question": "Aturan fragmentasi `Disjointness` untuk fragmentasi vertikal memiliki pengecualian untuk...",
+    "question": "Aturan `Disjointness` untuk fragmentasi vertikal memiliki pengecualian untuk...",
     "options": [
       "Atribut `foreign key`",
       "Atribut `primary key`",
@@ -630,7 +635,7 @@
   },
   {
     "id": 70,
-    "question": "Fragmentasi yang didefinisikan menggunakan operasi `Selection (σ)` dan `Projection (π)` dari aljabar relasional adalah...",
+    "question": "Fragmentasi yang didefinisikan menggunakan operasi `Selection (σ)` dan `Projection (π)` adalah...",
     "options": [
       "Fragmentasi Horizontal",
       "Fragmentasi Vertikal",
@@ -641,7 +646,7 @@
   },
   {
     "id": 71,
-    "question": "Dalam contoh fragmentasi vertikal pada tabel `Staff`, mengapa atribut `staffNo` ada di kedua fragmen (`S1` dan `S2`)?",
+    "question": "Pada fragmentasi vertikal tabel `Staff`, mengapa atribut `staffNo` ada di kedua fragmen?",
     "options": [
       "Karena `staffNo` adalah `foreign key`",
       "Untuk menjaga redundansi data",
@@ -652,7 +657,7 @@
   },
   {
     "id": 72,
-    "question": "Dalam contoh fragmentasi campuran pada tabel `Staff`, operasi apa yang digunakan untuk merekonstruksi tabel `Staff` asli?",
+    "question": "Untuk merekonstruksi tabel `Staff` dari fragmentasi campuran, operasi yang digunakan adalah...",
     "options": [
       "S1 ∪ (S21 ⋈ S22 ⋈ S23)",
       "S1 ⋈ (S21 ∪ S22 ∪ S23)",
@@ -663,7 +668,7 @@
   },
   {
     "id": 73,
-    "question": "Pada perancangan basis data menggunakan DBDesigner, relasi `1-n Non-Identifying-Relation` digunakan untuk membuat hubungan...",
+    "question": "Pada DBDesigner, relasi `1-n Non-Identifying-Relation` digunakan untuk membuat hubungan...",
     "options": [
       "Satu-ke-satu (1-1)",
       "Satu-ke-banyak (1-M)",
@@ -689,14 +694,14 @@
     "options": [
       "Membuat backup database",
       "Mengimpor data dari file teks",
-      "Mengekspor rancangan tabel ke server database (misalnya MySQL)",
+      "Mengekspor rancangan tabel ke server database",
       "Memeriksa integritas data"
     ],
-    "answer": "Mengekspor rancangan tabel ke server database (misalnya MySQL)"
+    "answer": "Mengekspor rancangan tabel ke server database"
   },
   {
     "id": 76,
-    "question": "Masalah konkurensi di mana sebuah transaksi meringkas data sementara transaksi lain sedang memodifikasi sebagian dari data tersebut, sehingga menghasilkan ringkasan yang salah, disebut...",
+    "question": "Masalah konkurensi di mana sebuah transaksi meringkas data sementara transaksi lain sedang memodifikasi sebagian dari data tersebut disebut...",
     "options": [
       "Lost Update Problem",
       "Uncommitted Update Problem",
@@ -707,7 +712,7 @@
   },
   {
     "id": 77,
-    "question": "Jika transaksi A memegang kunci `Shared (S)` pada sebuah record, dan transaksi B meminta kunci `Exclusive (X)` pada record yang sama, apa yang akan terjadi pada transaksi B?",
+    "question": "Jika transaksi A memegang kunci `Shared (S)`, dan transaksi B meminta kunci `Exclusive (X)` pada record yang sama, apa yang akan terjadi pada transaksi B?",
     "options": [
       "Transaksi B akan langsung mendapatkan kunci X",
       "Transaksi B akan menunggu hingga transaksi A melepaskan kunci S",
@@ -718,7 +723,7 @@
   },
   {
     "id": 78,
-    "question": "Jika transaksi A memegang kunci `Shared (S)` dan transaksi B meminta kunci `Shared (S)` pada record yang sama, apa yang terjadi?",
+    "question": "Jika transaksi A memegang kunci `Shared (S)` dan transaksi B juga meminta kunci `Shared (S)` pada record yang sama, apa yang terjadi?",
     "options": [
       "Transaksi B harus menunggu",
       "Transaksi A dibatalkan",
@@ -735,7 +740,7 @@
   },
   {
     "id": 80,
-    "question": "Informasi yang hilang jika terjadi kerusakan sistem (misalnya mati listrik) disimpan di...",
+    "question": "Informasi yang hilang jika terjadi `system crash` (misalnya mati listrik) disimpan di...",
     "options": [
       "Volatile storage",
       "Non-volatile storage",
@@ -757,7 +762,7 @@
   },
   {
     "id": 82,
-    "question": "Tingkatan masalah keamanan yang berkaitan dengan pengamanan lokasi fisik database (misalnya ruang server) disebut...",
+    "question": "Tingkatan masalah keamanan yang berkaitan dengan pengamanan lokasi fisik database disebut...",
     "options": ["Man", "Phisical", "Sistem Operasi", "Sistem Database"],
     "answer": "Phisical"
   },
@@ -791,7 +796,7 @@
   },
   {
     "id": 86,
-    "question": "Ekspresi Aljabar Relasional `π` nama_dos,gaji (DOSEN) akan menghasilkan...",
+    "question": "Ekspresi Aljabar Relasional `π nama_dos,gaji (DOSEN)` akan menghasilkan...",
     "options": [
       "Semua data dari tabel DOSEN",
       "Hanya kolom nama dosen dan gaji dari tabel DOSEN",
@@ -971,7 +976,7 @@
   },
   {
     "id": 104,
-    "question": "Perintah untuk merubah struktur table adalah:",
+    "question": "Perintah untuk merubah struktur tabel adalah:",
     "options": [
       "Create table",
       "Drop table",
@@ -1061,13 +1066,13 @@
   },
   {
     "id": 113,
-    "question": "Untuk mengeksekusi sinkronisasi pada DB Designer:",
+    "question": "Untuk mengeksekusi sinkronisasi pada DB Designer, pilih menu:",
     "options": ["Start", "Connect", "Setup", "Execute", "Run"],
     "answer": "Execute"
   },
   {
     "id": 114,
-    "question": "DB Designer software perancangan basis data yang mempunyai antar muka berbentuk:",
+    "question": "DB Designer adalah software perancangan basis data yang mempunyai antarmuka berbentuk:",
     "options": ["GUI", "Command Line", "Structure Based", "Konseptual", "3D"],
     "answer": "GUI"
   },
@@ -1079,7 +1084,7 @@
   },
   {
     "id": 116,
-    "question": "Contoh non volatile storage adalah:",
+    "question": "Contoh non-volatile storage adalah:",
     "options": ["RAM", "ROM", "Hardisk RAID", "Flashdisk", "Memory"],
     "answer": "Hardisk RAID"
   },
@@ -1199,9 +1204,9 @@
   },
   {
     "id": 129,
-    "question": "Yang bukan merupakan operator dasar dalam relasional algebra adalah:",
-    "options": ["Select", "Project", "Join", "Rename", "Union"],
-    "answer": "Join"
+    "question": "Yang bukan merupakan operator dalam relasional algebra adalah:",
+    "options": ["Select", "Project", "Join", "Rename", "Drop"],
+    "answer": "Drop"
   },
   {
     "id": 130,
@@ -1263,11 +1268,11 @@
     "options": [
       "Menghapus data",
       "Menyalin data",
-      "Menggabungkan dua tabel",
+      "Menggabungkan dua tabel atau lebih",
       "Menampilkan baris ganda",
       "Membuat relasi baru"
     ],
-    "answer": "Menggabungkan dua tabel"
+    "answer": "Menggabungkan dua tabel atau lebih"
   },
   {
     "id": 137,
@@ -1345,13 +1350,13 @@
       "Mencatat data log",
       "Menghapus user"
     ],
-    "answer": "Menyinkronkan akses ke data"
+    "answer": "Meningkatkan performa aplikasi"
   },
   {
     "id": 144,
     "question": "Masalah yang dapat timbul jika tidak ada concurrency control:",
     "options": ["File corrupt", "Deadlock", "Lost update", "Semua benar"],
-    "answer": "Semua benar"
+    "answer": "Lost update"
   },
   {
     "id": 145,
@@ -1395,11 +1400,11 @@
     "options": [
       "Menyimpan file",
       "Membuat index",
-      "Menyimpan query sebagai virtual table",
+      "Menyimpan query sebagai tabel virtual",
       "Mempercepat akses",
       "Menghapus log"
     ],
-    "answer": "Menyimpan query sebagai virtual table"
+    "answer": "Menyimpan query sebagai tabel virtual"
   },
   {
     "id": 149,
@@ -1439,7 +1444,7 @@
   },
   {
     "id": 152,
-    "question": "Masalah ini timbul jika sebuah transaksi membaca suatu nilai tetapi transaksi yang kedua mengupdate beberapa nilai tersebut selama eksekusi transaksi pertama disebut:",
+    "question": "Masalah ini timbul jika sebuah transaksi membaca suatu nilai tetapi transaksi kedua mengupdate beberapa nilai tersebut selama eksekusi transaksi pertama, disebut:",
     "options": [
       "Uncommited Update Problem",
       "Lost Update Problem",
@@ -1471,7 +1476,7 @@
       "Jenis locking",
       "Crass"
     ],
-    "answer": "Locking"
+    "answer": "Konsep dasar locking"
   },
   {
     "id": 155,
@@ -1505,15 +1510,15 @@
   },
   {
     "id": 158,
-    "question": "Yang termasuk operator gabungan dalam relational algebra adalah:",
+    "question": "Yang termasuk operator dasar gabungan dalam relational algebra adalah:",
     "options": ["Select", "Union", "Rename", "Projection", "Filter"],
     "answer": "Union"
   },
   {
     "id": 159,
     "question": "Select dan project adalah bagian dari:",
-    "options": ["DDL", "DML", "SQL", "Algebra relasional", "View"],
-    "answer": "Algebra relasional"
+    "options": ["DDL", "DML", "SQL", "Aljabar relasional", "View"],
+    "answer": "Aljabar relasional"
   },
   {
     "id": 160,
@@ -1547,7 +1552,7 @@
   },
   {
     "id": 163,
-    "question": "Untuk menampilkan data secara unik (tanpa duplikat):",
+    "question": "Untuk menampilkan data secara unik (tanpa duplikat) digunakan:",
     "options": [
       "SELECT *",
       "SELECT ONLY",
@@ -1613,15 +1618,9 @@
   },
   {
     "id": 170,
-    "question": "Subquery yang mengembalikan lebih dari satu nilai:",
-    "options": [
-      "Harus menggunakan IN atau operator sejenis",
-      "Akan menyebabkan Error",
-      "Diperbolehkan di semua pernyataan",
-      "Tidak berguna",
-      "Hanya pada DELETE"
-    ],
-    "answer": "Harus menggunakan IN atau operator sejenis"
+    "question": "Subquery yang mengembalikan lebih dari satu nilai, harus menggunakan operator:",
+    "options": ["IN", "=", "<>", "LIKE", "IS NULL"],
+    "answer": "IN"
   },
   {
     "id": 171,
