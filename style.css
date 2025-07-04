@@ -1,0 +1,81 @@
+body {
+  font-family: "Inter", sans-serif;
+  background-color: #0f172a; /* bg-slate-900 */
+}
+.screen,
+.modal-overlay {
+  display: none;
+  animation: fadeIn 0.4s ease-out;
+}
+.screen.active,
+.modal-overlay.active {
+  display: flex;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.98) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+.modal-content {
+  animation: slideUp 0.3s ease-out;
+}
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+.review-container::-webkit-scrollbar {
+  width: 8px;
+}
+.review-container::-webkit-scrollbar-track {
+  background: #1e293b;
+}
+.review-container::-webkit-scrollbar-thumb {
+  background: #38bdf8;
+  border-radius: 4px;
+}
+@media (max-width: 768px) {
+  footer {
+    position: static !important;
+    margin-top: 2rem;
+  }
+}
+.packet-button,
+#start-button,
+#review-button,
+#restart-button,
+#next-button,
+#back-to-result-button {
+  box-shadow: 0 2px 8px 0 rgba(56, 189, 248, 0.1);
+  transition: box-shadow 0.2s;
+}
+.packet-button:hover,
+#start-button:hover,
+#review-button:hover,
+#restart-button:hover,
+#next-button:hover,
+#back-to-result-button:hover {
+  box-shadow: 0 4px 16px 0 rgba(56, 189, 248, 0.18);
+}
+.options-container button:active {
+  transform: scale(0.98);
+}
+@media (max-width: 768px) {
+  .bg-slate-800 {
+    box-shadow: 0 2px 16px 0 rgba(30, 41, 59, 0.18);
+  }
+}
+#quiz-back-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

@@ -1,0 +1,2212 @@
+// --- Data Soal dalam Format JSON ---
+const quizQuestions = [
+  // Soal 1-100 (Paket 1 & 2)
+  {
+    id: 1,
+    question:
+      "Dalam bahasa Query Formal, terdapat dua dasar pembentukan bahasa, yaitu Aljabar Relasional dan...",
+    options: [
+      "Kalkulus Prosedural",
+      "Kalkulus Relasional",
+      "Aljabar Proposisional",
+      "Kalkulus Logika",
+    ],
+    answer: "Kalkulus Relasional",
+  },
+  {
+    id: 2,
+    question:
+      "Bahasa query yang didasarkan pada Aljabar Relasional merupakan bahasa query yang bersifat...",
+    options: ["Non-Prosedural", "Prosedural", "Deklaratif", "Fungsional"],
+    answer: "Prosedural",
+  },
+  {
+    id: 3,
+    question:
+      "Operator Aljabar Relasional yang digunakan untuk pemilihan tupel atau record adalah...",
+    options: ["Project (π)", "Join (⋈)", "Restrict (σ)", "Divide (÷)"],
+    answer: "Restrict (σ)",
+  },
+  {
+    id: 4,
+    question:
+      "Operator Project (π) dalam Aljabar Relasional berfungsi untuk...",
+    options: [
+      "Memilih tupel atau record",
+      "Menggabungkan tabel",
+      "Memilih atribut atau field",
+      "Membagi relasi",
+    ],
+    answer: "Memilih atribut atau field",
+  },
+  {
+    id: 5,
+    question:
+      "Perintah SQL `CREATE TABLE`, `ALTER TABLE`, dan `DROP TABLE` termasuk dalam sub-bahasa...",
+    options: [
+      "Data Manipulation Language (DML)",
+      "Data Control Language (DCL)",
+      "Transaction Control Language (TCL)",
+      "Data Definition Language (DDL)",
+    ],
+    answer: "Data Definition Language (DDL)",
+  },
+  {
+    id: 6,
+    question:
+      "Sintaks SQL yang digunakan untuk menambahkan record baru ke dalam sebuah tabel adalah...",
+    options: ["UPDATE", "SELECT", "INSERT", "ADD"],
+    answer: "INSERT",
+  },
+  {
+    id: 7,
+    question:
+      "Untuk mengubah nilai atribut pada suatu record dari sebuah tabel, digunakan perintah...",
+    options: ["CHANGE", "MODIFY", "INSERT", "UPDATE"],
+    answer: "UPDATE",
+  },
+  {
+    id: 8,
+    question:
+      "Operator Aljabar Relasional `Cartesian product (X)` digunakan untuk...",
+    options: [
+      "Menyeleksi tupel-tupel yang memenuhi syarat",
+      "Menghasilkan gabungan tabel dengan atribut yang sama",
+      "Menghasilkan tabel hasil perkalian kartesian dari dua relasi",
+      "Mendapatkan irisan dari dua tabel",
+    ],
+    answer: "Menghasilkan tabel hasil perkalian kartesian dari dua relasi",
+  },
+  {
+    id: 9,
+    question:
+      "Dalam SQL, jenis JOIN yang hanya menggabungkan baris data dari dua tabel yang datanya bersesuaian (memiliki nilai kunci yang sama) adalah...",
+    options: ["LEFT JOIN", "RIGHT JOIN", "FULL OUTER JOIN", "INNER JOIN"],
+    answer: "INNER JOIN",
+  },
+  {
+    id: 10,
+    question:
+      "Jika Anda ingin menampilkan semua data dari tabel kiri dan data yang bersesuaian dari tabel kanan, jenis JOIN yang digunakan adalah...",
+    options: ["INNER JOIN", "LEFT JOIN", "RIGHT JOIN", "CROSS JOIN"],
+    answer: "LEFT JOIN",
+  },
+  {
+    id: 11,
+    question: "Fungsi agregat `COUNT` dalam SQL digunakan untuk...",
+    options: [
+      "Menghitung total nilai dari sebuah kolom numerik",
+      "Menghitung jumlah record/baris",
+      "Menghitung nilai rata-rata",
+      "Mencari nilai terkecil",
+    ],
+    answer: "Menghitung jumlah record/baris",
+  },
+  {
+    id: 12,
+    question:
+      "Untuk menghitung total dari kolom yang mempunyai tipe data numerik, digunakan fungsi agregat...",
+    options: ["AVG", "MAX", "SUM", "COUNT"],
+    answer: "SUM",
+  },
+  {
+    id: 13,
+    question:
+      "Sebuah `SELECT` statement yang berada di dalam klausa `WHERE` atau `HAVING` dari pernyataan `SELECT` luar disebut...",
+    options: ["JOIN", "UNION", "Subquery", "View"],
+    answer: "Subquery",
+  },
+  {
+    id: 14,
+    question:
+      "Basis data terdistribusi didefinisikan sebagai kumpulan data yang digunakan bersama, saling terhubung secara logik, tetapi...",
+    options: [
+      "Tersebar secara fisik pada suatu jaringan komputer",
+      "Tersimpan dalam satu komputer pusat",
+      "Memiliki skema yang berbeda di setiap lokasi",
+      "Tidak dapat diakses secara bersamaan",
+    ],
+    answer: "Tersebar secara fisik pada suatu jaringan komputer",
+  },
+  {
+    id: 15,
+    question: "Salah satu keuntungan dari basis data terdistribusi adalah...",
+    options: [
+      "Kompleksitas yang rendah",
+      "Harga software yang murah",
+      "Adanya otonomi lokal",
+      "Keamanan data yang lebih terjamin",
+    ],
+    answer: "Adanya otonomi lokal",
+  },
+  {
+    id: 16,
+    question: "Manakah yang merupakan kerugian dari basis data terdistribusi?",
+    options: [
+      "Peningkatan kinerja",
+      "Pertumbuhan yang modular",
+      "Kompleksitas dan kelemahan dalam keamanan",
+      "Peningkatan ketersediaan data",
+    ],
+    answer: "Kompleksitas dan kelemahan dalam keamanan",
+  },
+  {
+    id: 17,
+    question:
+      "Topologi jaringan distribusi data di mana jika salah satu node rusak, yang lainnya masih dapat berjalan, namun memiliki biaya yang mahal adalah...",
+    options: [
+      "Tree Structured network",
+      "Ring network",
+      "Fully Connected network",
+      "Star network",
+    ],
+    answer: "Fully Connected network",
+  },
+  {
+    id: 18,
+    question:
+      "Pada topologi Tree Structured Network, kerugian utamanya adalah...",
+    options: [
+      "Biaya yang sangat mahal",
+      "Jika node pusat rusak, semua akan rusak",
+      "Control management tidak terjamin",
+      "Proses dimulai dari atas",
+    ],
+    answer: "Jika node pusat rusak, semua akan rusak",
+  },
+  {
+    id: 19,
+    question:
+      "Proses pembagian database di mana database dipecah-pecah berdasarkan kolom dan baris untuk disimpan di site yang berbeda disebut...",
+    options: ["Replikasi", "Normalisasi", "Fragmentasi", "Indeksasi"],
+    answer: "Fragmentasi",
+  },
+  {
+    id: 20,
+    question: "Alasan diperlukannya fragmentasi data adalah untuk, kecuali...",
+    options: [
+      "Efisiensi, karena data disimpan dekat dengan pengguna",
+      "Meningkatkan redundansi data",
+      "Paralelisme, untuk meningkatkan konkurensi",
+      "Keamanan, karena data yang tidak perlu tidak disimpan lokal",
+    ],
+    answer: "Meningkatkan redundansi data",
+  },
+  {
+    id: 21,
+    question:
+      "Aturan fragmentasi yang menyatakan bahwa sebuah relasi asli harus dapat dibuat kembali dari fragmen-fragmennya disebut...",
+    options: [
+      "Kondisi lengkap (Completeness)",
+      "Rekonstruksi (Reconstruction)",
+      "Disjointness",
+      "Otonomi",
+    ],
+    answer: "Rekonstruksi (Reconstruction)",
+  },
+  {
+    id: 22,
+    question:
+      "Jenis fragmentasi yang memecah relasi menjadi beberapa sub-set tupel (baris) berdasarkan suatu predikat adalah...",
+    options: [
+      "Fragmentasi Vertikal",
+      "Fragmentasi Horizontal",
+      "Fragmentasi Campuran",
+      "Fragmentasi Invers",
+    ],
+    answer: "Fragmentasi Horizontal",
+  },
+  {
+    id: 23,
+    question: "Fragmentasi vertikal membagi relasi berdasarkan...",
+    options: [
+      "Baris atau tupel",
+      "Atribut atau kolom",
+      "Kunci asing",
+      "Kondisi `WHERE`",
+    ],
+    answer: "Atribut atau kolom",
+  },
+  {
+    id: 24,
+    question:
+      "Untuk merekonstruksi relasi yang difragmentasi secara horizontal, digunakan operasi Aljabar Relasional...",
+    options: ["Natural Join", "Union", "Intersection", "Cartesian Product"],
+    answer: "Union",
+  },
+  {
+    id: 25,
+    question:
+      "Rekonstruksi relasi dari fragmentasi vertikal dilakukan dengan menggunakan operasi...",
+    options: ["Union", "Difference", "Natural Join", "Selection"],
+    answer: "Natural Join",
+  },
+  {
+    id: 26,
+    question:
+      "Perangkat lunak bantu untuk perancangan basis data yang dioptimalkan untuk MySQL yang dibahas dalam dokumen adalah...",
+    options: [
+      "SQL Server Management Studio",
+      "Oracle SQL Developer",
+      "DBDesigner",
+      "phpMyAdmin",
+    ],
+    answer: "DBDesigner",
+  },
+  {
+    id: 27,
+    question:
+      "Masalah yang timbul jika dua transaksi mengakses item database yang sama yang mengakibatkan nilai dari database tersebut menjadi tidak benar disebut...",
+    options: [
+      "Uncommitted Update Problem",
+      "Problem of Inconsistency Analysis",
+      "Lost Update Problem",
+      "Deadlock",
+    ],
+    answer: "Lost Update Problem",
+  },
+  {
+    id: 28,
+    question:
+      "Ketika sebuah transaksi membaca suatu record yang sudah dimodifikasi oleh transaksi lain tetapi belum di-commit, dan transaksi tersebut kemudian di-rollback, masalah ini disebut...",
+    options: [
+      "Masalah Modifikasi Sementara (Uncommitted Update Problem)",
+      "Masalah Kehilangan Modifikasi (Lost Update Problem)",
+      "Masalah Analisa yang tidak konsisten",
+      "Masalah Integritas",
+    ],
+    answer: "Masalah Modifikasi Sementara (Uncommitted Update Problem)",
+  },
+  {
+    id: 29,
+    question:
+      "Mekanisme pengontrol konkurensi di mana sebuah transaksi memerlukan kunci untuk record agar tidak diubah oleh transaksi lain disebut...",
+    options: ["Timestamping", "Locking", "Recovery", "Validation"],
+    answer: "Locking",
+  },
+  {
+    id: 30,
+    question:
+      "Jenis kunci (lock) yang memungkinkan pengguna membaca record tetapi tidak mengubahnya, dan pengguna lain juga dapat membacanya adalah...",
+    options: ["Exclusive (X)", "Primary (P)", "Shared (S)", "Read-only (R)"],
+    answer: "Shared (S)",
+  },
+  {
+    id: 31,
+    question:
+      "Jenis kunci (lock) yang memungkinkan pengguna untuk membaca dan mengubah record, sementara pengguna lain tidak diperbolehkan membaca ataupun mengubahnya adalah...",
+    options: ["Shared (S)", "Exclusive (X)", "Write (W)", "Update (U)"],
+    answer: "Exclusive (X)",
+  },
+  {
+    id: 32,
+    question:
+      "Alternatif mekanisme kontrol konkurensi selain locking yang dapat menghilangkan masalah deadlock adalah...",
+    options: ["Recovery", "Security", "Two-phase commit", "Timestamping"],
+    answer: "Timestamping",
+  },
+  {
+    id: 33,
+    question:
+      "Menurut klasifikasi failure berdasarkan jenis storage, `RAM` termasuk dalam kategori...",
+    options: [
+      "Volatile storage",
+      "Non-volatile storage",
+      "Stable storage",
+      "Secondary storage",
+    ],
+    answer: "Volatile storage",
+  },
+  {
+    id: 34,
+    question:
+      "Kegagalan fungsi perangkat keras yang menyebabkan hilangnya data pada volatile storage tetapi data pada non-volatile storage masih tetap ada disebut...",
+    options: ["Logical Error", "System Error", "System Crash", "Disk Failure"],
+    answer: "System Crash",
+  },
+  {
+    id: 35,
+    question:
+      "Proteksi data terhadap perusakan dan pemakaian oleh pengguna yang tidak mempunyai izin disebut...",
+    options: ["Integrity", "Concurrency", "Recovery", "Security"],
+    answer: "Security",
+  },
+  {
+    id: 36,
+    question:
+      "Cara yang diberikan pada seorang pemakai untuk mendapatkan model database yang sesuai dengan kebutuhan perorangan, yang juga merupakan mekanisme keamanan, adalah konsep...",
+    options: ["VIEW", "INDEX", "TRIGGER", "TABLE"],
+    answer: "VIEW",
+  },
+  {
+    id: 37,
+    question:
+      "Aturan integritas pada basis data relasional yang menyatakan bahwa tidak ada satu komponen kunci primer pun yang boleh bernilai kosong (null) adalah...",
+    options: [
+      "Integritas Referensi",
+      "Integritas Domain",
+      "Integritas Entity",
+      "Integritas Kolom",
+    ],
+    answer: "Integritas Entity",
+  },
+  {
+    id: 38,
+    question:
+      "Perintah `GRANT` dan `REVOKE` dalam SQL termasuk dalam kelompok...",
+    options: [
+      "Data Definition Language",
+      "Data Manipulation Language",
+      "Data Access",
+      "Data Integrity",
+    ],
+    answer: "Data Access",
+  },
+  {
+    id: 39,
+    question:
+      "Operator Aljabar Relasional `Set Difference (-)` berfungsi untuk...",
+    options: [
+      "Menggabungkan dua tabel",
+      "Menghasilkan irisan dua tabel",
+      "Mendapatkan tupel yang ada di satu relasi tapi tidak ada di relasi lainnya",
+      "Menghasilkan perkalian kartesian",
+    ],
+    answer:
+      "Mendapatkan tupel yang ada di satu relasi tapi tidak ada di relasi lainnya",
+  },
+  {
+    id: 40,
+    question:
+      "Operator tambahan `NATURAL JOIN` adalah operasi yang menggabungkan...",
+    options: [
+      "Operasi selection dan projection",
+      "Operasi selection dan cartesian product pada kolom yang sama",
+      "Operasi union dan intersection",
+      "Operasi division dan selection",
+    ],
+    answer: "Operasi selection dan cartesian product pada kolom yang sama",
+  },
+  {
+    id: 41,
+    question:
+      "Dalam SQL, klausa yang digunakan setelah `GROUP BY` untuk menyaring hasil berdasarkan fungsi agregat adalah...",
+    options: ["WHERE", "LIKE", "HAVING", "ORDER BY"],
+    answer: "HAVING",
+  },
+  {
+    id: 42,
+    question:
+      "Untuk mengurutkan hasil query SQL, klausa yang digunakan adalah...",
+    options: ["SORT BY", "GROUP BY", "ARRANGE BY", "ORDER BY"],
+    answer: "ORDER BY",
+  },
+  {
+    id: 43,
+    question:
+      "Kata kunci subquery yang bernilai `TRUE` jika syarat dipenuhi oleh *semua* nilai yang dihasilkan subquery adalah...",
+    options: ["ANY", "SOME", "ALL", "EXIST"],
+    answer: "ALL",
+  },
+  {
+    id: 44,
+    question: "Pada topologi Star Network, keuntungan utamanya adalah...",
+    options: [
+      "Control management lebih terjamin karena bersifat sentral",
+      "Jika satu node rusak, yang lain tetap berjalan",
+      "Biaya implementasi yang rendah",
+      "Reliability yang tinggi",
+    ],
+    answer: "Control management lebih terjamin karena bersifat sentral",
+  },
+  {
+    id: 45,
+    question: "Kerugian dari fragmentasi adalah...",
+    options: [
+      "Keamanan data meningkat",
+      "Kinerja bisa menurun karena proses penggabungan kembali",
+      "Efisiensi penggunaan data",
+      "Meningkatkan paralelisme",
+    ],
+    answer: "Kinerja bisa menurun karena proses penggabungan kembali",
+  },
+  {
+    id: 46,
+    question:
+      "Dalam merancang relasi menggunakan DBDesigner, untuk membuat hubungan *many-to-many* antara dua tabel, tool tersebut secara otomatis akan...",
+    options: [
+      "Menambahkan foreign key di kedua tabel",
+      "Memunculkan tabel baru (tabel persimpangan)",
+      "Hanya menghubungkan kedua tabel tanpa perubahan struktur",
+      "Memberikan pesan error",
+    ],
+    answer: "Memunculkan tabel baru (tabel persimpangan)",
+  },
+  {
+    id: 47,
+    question: "Apa yang dimaksud dengan `Integritas Referensi`?",
+    options: [
+      "Tidak ada komponen kunci primer yang bernilai null",
+      "Suatu domain dapat dipakai sebagai kunci primer jika merupakan atribut tunggal pada domain tersebut",
+      "Semua data harus akurat dan valid",
+      "Setiap foreign key harus merujuk ke primary key yang ada atau bernilai null",
+    ],
+    answer:
+      "Setiap foreign key harus merujuk ke primary key yang ada atau bernilai null",
+  },
+  {
+    id: 48,
+    question: "`SELECT * FROM Mahasiswa;` adalah contoh perintah dari...",
+    options: ["DDL", "DML", "DCL", "TCL"],
+    answer: "DML",
+  },
+  {
+    id: 49,
+    question: "Operasi `REVOKE` digunakan untuk...",
+    options: [
+      "Memberikan hak akses kepada pengguna",
+      "Menarik kembali hak akses yang telah diberikan",
+      "Membuat pengguna baru",
+      "Menghapus pengguna",
+    ],
+    answer: "Menarik kembali hak akses yang telah diberikan",
+  },
+  {
+    id: 50,
+    question:
+      "Proses mengimpor data dari file lain ke dalam tabel database dapat dilakukan dengan perintah...",
+    options: ["SELECT INTO OUTFILE", "EXPORT", "LOAD", "RECOVER TABLE"],
+    answer: "LOAD",
+  },
+  {
+    id: 51,
+    question:
+      "Manakah dari berikut ini yang merupakan operator tambahan (additional operasional) dalam Aljabar Relasional?",
+    options: [
+      "Restrict (σ)",
+      "Project (π)",
+      "Set Intersection (∩)",
+      "Union (∪)",
+    ],
+    answer: "Set Intersection (∩)",
+  },
+  {
+    id: 52,
+    question:
+      "Berdasarkan contoh tabel di dokumen, jika kita ingin menampilkan semua mahasiswa yang tinggal di 'DEPOK' dan berjenis kelamin 'LAKI-LAKI', ekspresi Aljabar Relasional yang tepat adalah...",
+    options: [
+      "σ Alamat='DEPOK' ∨ J_KEL='LAKI-LAKI' (MAHASISWA)",
+      "σ Alamat='DEPOK' ∧ J_KEL='LAKI-LAKI' (MAHASISWA)",
+      "π NAMA_MHS (σ Alamat='DEPOK' (MAHASISWA))",
+      "σ Alamat='DEPOK' (MAHASISWA) - σ J_KEL='PEREMPUAN' (MAHASISWA)",
+    ],
+    answer: "σ Alamat='DEPOK' ∧ J_KEL='LAKI-LAKI' (MAHASISWA)",
+  },
+  {
+    id: 53,
+    question:
+      "Operasi Aljabar Relasional yang digunakan untuk menggabungkan operasi cartesian product dengan operasi selection dengan suatu kriteria disebut...",
+    options: ["Natural Join", "Theta Join", "Union", "Division"],
+    answer: "Theta Join",
+  },
+  {
+    id: 54,
+    question: "Dalam SQL, perintah `DROP DATABASE` akan...",
+    options: [
+      "Menghapus tabel dari database",
+      "Menghapus seluruh database beserta tabel di dalamnya",
+      "Menghapus view dari database",
+      "Menghapus indeks dari tabel",
+    ],
+    answer: "Menghapus seluruh database beserta tabel di dalamnya",
+  },
+  {
+    id: 55,
+    question:
+      "Sintaks SQL untuk mengubah nama kolom `JKEL` menjadi `JENIS_KELAMIN` pada tabel Mahasiswa adalah...",
+    options: [
+      "ALTER TABLE Mahasiswa MODIFY JKEL JENIS_KELAMIN char(15);",
+      "ALTER TABLE Mahasiswa DROP JKEL;",
+      "ALTER TABLE Mahasiswa RENAME COLUMN JKEL TO JENIS_KELAMIN;",
+      "ALTER TABLE Mahasiswa CHANGE COLUMN JKEL JENIS_KELAMIN char(15);",
+    ],
+    answer: "ALTER TABLE Mahasiswa CHANGE COLUMN JKEL JENIS_KELAMIN char(15);",
+  },
+  {
+    id: 56,
+    question:
+      "Klausa `WITH CHECK OPTION` pada perintah `CREATE VIEW` berfungsi untuk...",
+    options: [
+      "Memastikan view dibuat dengan benar",
+      "Memeriksa apakah data yang dimasukkan melalui view memenuhi kondisi view tersebut",
+      "Mengecek duplikasi data pada view",
+      "Memberikan opsi untuk menghapus view",
+    ],
+    answer:
+      "Memeriksa apakah data yang dimasukkan melalui view memenuhi kondisi view tersebut",
+  },
+  {
+    id: 57,
+    question: "Fungsi `DISTINCT` dalam `SELECT` digunakan untuk...",
+    options: [
+      "Menampilkan semua data termasuk duplikat",
+      "Mengurutkan data",
+      "Menampilkan data yang unik (menghilangkan duplikat)",
+      "Menghitung jumlah data",
+    ],
+    answer: "Menampilkan data yang unik (menghilangkan duplikat)",
+  },
+  {
+    id: 58,
+    question:
+      "Berdasarkan contoh tabel Nilai, query `SELECT * FROM Nilai WHERE MID >= 70 AND FINAL >= 75;` akan menghasilkan berapa baris?",
+    options: ["2 baris", "3 baris", "4 baris", "5 baris"],
+    answer: "3 baris",
+  },
+  {
+    id: 59,
+    question: "`LEFT OUTER JOIN` sama dengan `LEFT JOIN`. Pernyataan ini...",
+    options: [
+      "Benar",
+      "Salah",
+      "Tergantung pada versi SQL",
+      "Hanya benar untuk MySQL",
+    ],
+    answer: "Benar",
+  },
+  {
+    id: 60,
+    question:
+      "Jika tabel `tb_kota` di-`RIGHT JOIN` dengan tabel `tb_provinsi` (seperti contoh di slide 47), baris mana dari `tb_provinsi` yang akan muncul meskipun tidak memiliki padanan di `tb_kota`?",
+    options: ["DKI Jakarta", "Jawa Tengah", "Papua Barat", "Jawa Barat"],
+    answer: "Papua Barat",
+  },
+  {
+    id: 61,
+    question:
+      "Perintah `GRANT SELECT (FINAL) ON NILAI TO ADI;` memberikan hak akses kepada Adi untuk...",
+    options: [
+      "Hanya melihat kolom `FINAL` dari tabel `NILAI`",
+      "Melihat semua kolom dari tabel `NILAI`",
+      "Mengubah nilai pada kolom `FINAL`",
+      "Menghapus data dari tabel `NILAI`",
+    ],
+    answer: "Hanya melihat kolom `FINAL` dari tabel `NILAI`",
+  },
+  {
+    id: 62,
+    question: "Perintah `RECOVER TABLE MHS;` termasuk dalam kategori...",
+    options: [
+      "Data Definition Language (DML)",
+      "Data Access",
+      "Auxiliary",
+      "Data Integrity",
+    ],
+    answer: "Data Integrity",
+  },
+  {
+    id: 63,
+    question: "Perintah `RENAME TABLE MHS TO MAHASISWA;` berfungsi untuk...",
+    options: [
+      "Mengganti nama database",
+      "Mengganti nama kolom",
+      "Membuat alias untuk tabel",
+      "Mengganti nama tabel",
+    ],
+    answer: "Mengganti nama tabel",
+  },
+  {
+    id: 64,
+    question: "`SELECT AVG(SKS) FROM MATAKULIAH;` akan menghitung...",
+    options: [
+      "Jumlah total SKS",
+      "Rata-rata dari jumlah SKS",
+      "Jumlah mata kuliah",
+      "SKS minimum",
+    ],
+    answer: "Rata-rata dari jumlah SKS",
+  },
+  {
+    id: 65,
+    question: "Kata kunci subquery `EXIST` akan bernilai `TRUE` jika...",
+    options: [
+      "Subquery mengembalikan nilai `NULL`",
+      "Terdapat sedikitnya satu baris di tabel hasil yang dikirim oleh subquery",
+      "Semua baris dalam subquery memenuhi kondisi",
+      "Subquery mengembalikan tabel kosong",
+    ],
+    answer:
+      "Terdapat sedikitnya satu baris di tabel hasil yang dikirim oleh subquery",
+  },
+  {
+    id: 66,
+    question:
+      "Dalam basis data terdistribusi, data pada masing-masing situs dapat menangani aplikasi lokal secara...",
+    options: ["Terpusat", "Bergantung", "Otonom", "Terbatas"],
+    answer: "Otonom",
+  },
+  {
+    id: 67,
+    question:
+      "Topologi jaringan di mana setiap node terhubung ke node pusat, dan jika pusat rusak maka semua rusak, adalah...",
+    options: [
+      "Ring Network",
+      "Tree Structured Network",
+      "Star Network",
+      "Fully Connected Network",
+    ],
+    answer: "Star Network",
+  },
+  {
+    id: 68,
+    question:
+      "Keuntungan basis data terdistribusi di mana penambahan unit komputer baru dapat dilakukan dengan mudah disebut...",
+    options: [
+      "Peningkatan kinerja",
+      "Otonomi lokal",
+      "Pertumbuhan yang modular",
+      "Ekonomis",
+    ],
+    answer: "Pertumbuhan yang modular",
+  },
+  {
+    id: 69,
+    question:
+      "Aturan fragmentasi `Disjointness` untuk fragmentasi vertikal memiliki pengecualian untuk...",
+    options: [
+      "Atribut `foreign key`",
+      "Atribut `primary key`",
+      "Atribut dengan nilai `NULL`",
+      "Semua atribut numerik",
+    ],
+    answer: "Atribut `primary key`",
+  },
+  {
+    id: 70,
+    question:
+      "Fragmentasi yang didefinisikan menggunakan operasi `Selection (σ)` dan `Projection (π)` dari aljabar relasional adalah...",
+    options: [
+      "Fragmentasi Horizontal",
+      "Fragmentasi Vertikal",
+      "Fragmentasi Campuran",
+      "Fragmentasi Relasional",
+    ],
+    answer: "Fragmentasi Campuran",
+  },
+  {
+    id: 71,
+    question:
+      "Dalam contoh fragmentasi vertikal pada tabel `Staff`, mengapa atribut `staffNo` ada di kedua fragmen (`S1` dan `S2`)?",
+    options: [
+      "Karena `staffNo` adalah `foreign key`",
+      "Untuk menjaga redundansi data",
+      "Karena dibutuhkan untuk proses rekonstruksi (Join)",
+      "Karena merupakan atribut yang paling sering diakses",
+    ],
+    answer: "Karena dibutuhkan untuk proses rekonstruksi (Join)",
+  },
+  {
+    id: 72,
+    question:
+      "Dalam contoh fragmentasi campuran pada tabel `Staff`, operasi apa yang digunakan untuk merekonstruksi tabel `Staff` asli?",
+    options: [
+      "S1 ∪ (S21 ⋈ S22 ⋈ S23)",
+      "S1 ⋈ (S21 ∪ S22 ∪ S23)",
+      "(S1 ∪ S21) ⋈ (S22 ∪ S23)",
+      "S1 ∪ S21 ∪ S22 ∪ S23",
+    ],
+    answer: "S1 ⋈ (S21 ∪ S22 ∪ S23)",
+  },
+  {
+    id: 73,
+    question:
+      "Pada perancangan basis data menggunakan DBDesigner, relasi `1-n Non-Identifying-Relation` digunakan untuk membuat hubungan...",
+    options: [
+      "Satu-ke-satu (1-1)",
+      "Satu-ke-banyak (1-M)",
+      "Banyak-ke-banyak (M-M)",
+      "Rekursif",
+    ],
+    answer: "Satu-ke-banyak (1-M)",
+  },
+  {
+    id: 74,
+    question:
+      "Saat membuat relasi M-M di DBDesigner antara tabel `faktur` dan `barang`, tabel baru apa yang otomatis dibuat?",
+    options: [
+      "transaksi",
+      "relasi_faktur_barang",
+      "detail_faktur",
+      "faktur_has_barang",
+    ],
+    answer: "faktur_has_barang",
+  },
+  {
+    id: 75,
+    question: "`Database Synchronization` di DBDesigner digunakan untuk...",
+    options: [
+      "Membuat backup database",
+      "Mengimpor data dari file teks",
+      "Mengekspor rancangan tabel ke server database (misalnya MySQL)",
+      "Memeriksa integritas data",
+    ],
+    answer: "Mengekspor rancangan tabel ke server database (misalnya MySQL)",
+  },
+  {
+    id: 76,
+    question:
+      "Masalah konkurensi di mana sebuah transaksi meringkas data sementara transaksi lain sedang memodifikasi sebagian dari data tersebut, sehingga menghasilkan ringkasan yang salah, disebut...",
+    options: [
+      "Lost Update Problem",
+      "Uncommitted Update Problem",
+      "Problem of Inconsistency Analysis",
+      "Phantom Read Problem",
+    ],
+    answer: "Problem of Inconsistency Analysis",
+  },
+  {
+    id: 77,
+    question:
+      "Jika transaksi A memegang kunci `Shared (S)` pada sebuah record, dan transaksi B meminta kunci `Exclusive (X)` pada record yang sama, apa yang akan terjadi pada transaksi B?",
+    options: [
+      "Transaksi B akan langsung mendapatkan kunci X",
+      "Transaksi B akan menunggu hingga transaksi A melepaskan kunci S",
+      "Transaksi A akan dibatalkan",
+      "Akan terjadi `deadlock`",
+    ],
+    answer: "Transaksi B akan menunggu hingga transaksi A melepaskan kunci S",
+  },
+  {
+    id: 78,
+    question:
+      "Jika transaksi A memegang kunci `Shared (S)` dan transaksi B meminta kunci `Shared (S)` pada record yang sama, apa yang terjadi?",
+    options: [
+      "Transaksi B harus menunggu",
+      "Transaksi A dibatalkan",
+      "Transaksi B akan langsung mendapatkan kunci S",
+      "Terjadi error",
+    ],
+    answer: "Transaksi B akan langsung mendapatkan kunci S",
+  },
+  {
+    id: 79,
+    question:
+      "`Timestamping` adalah mekanisme kontrol konkurensi yang mengatasi masalah...",
+    options: ["Keamanan", "Integritas data", "Deadlock", "Recovery"],
+    answer: "Deadlock",
+  },
+  {
+    id: 80,
+    question:
+      "Informasi yang hilang jika terjadi kerusakan sistem (misalnya mati listrik) disimpan di...",
+    options: [
+      "Volatile storage",
+      "Non-volatile storage",
+      "Stable storage",
+      "Offline storage",
+    ],
+    answer: "Volatile storage",
+  },
+  {
+    id: 81,
+    question: "Penyalahgunaan database yang tergolong 'disengaja' adalah...",
+    options: [
+      "Anomali karena pendistribusian data",
+      "Kegagalan sistem",
+      "`Insert`, `Delete`, & `Update` oleh pihak yang tidak berwenang",
+      "Error pada aplikasi",
+    ],
+    answer: "`Insert`, `Delete`, & `Update` oleh pihak yang tidak berwenang",
+  },
+  {
+    id: 82,
+    question:
+      "Tingkatan masalah keamanan yang berkaitan dengan pengamanan lokasi fisik database (misalnya ruang server) disebut...",
+    options: ["Man", "Phisical", "Sistem Operasi", "Sistem Database"],
+    answer: "Phisical",
+  },
+  {
+    id: 83,
+    question:
+      "`Update Authorization` memberikan wewenang kepada pengguna untuk...",
+    options: [
+      "Menambah data baru",
+      "Menghapus data",
+      "Memodifikasi data yang sudah ada, tetapi tidak bisa menghapus",
+      "Membuat relasi baru",
+    ],
+    answer: "Memodifikasi data yang sudah ada, tetapi tidak bisa menghapus",
+  },
+  {
+    id: 84,
+    question: "`Drop Authorization` memberikan wewenang untuk...",
+    options: [
+      "Menghapus atribut dari relasi",
+      "Menghapus record dari relasi",
+      "Menghapus relasi yang ada",
+      "Menghapus indeks",
+    ],
+    answer: "Menghapus relasi yang ada",
+  },
+  {
+    id: 85,
+    question:
+      "Memeriksa keakuratan dan validasi data dalam database adalah definisi dari...",
+    options: ["Security", "Concurrency", "Recovery", "Integrity"],
+    answer: "Integrity",
+  },
+  {
+    id: 86,
+    question:
+      "Ekspresi Aljabar Relasional `π` nama_dos,gaji (DOSEN) akan menghasilkan...",
+    options: [
+      "Semua data dari tabel DOSEN",
+      "Hanya kolom nama dosen dan gaji dari tabel DOSEN",
+      "Dosen yang gajinya di atas nilai tertentu",
+      "Jumlah dosen",
+    ],
+    answer: "Hanya kolom nama dosen dan gaji dari tabel DOSEN",
+  },
+  {
+    id: 87,
+    question: "Perintah SQL `ALTER TABLE Mahasiswa ADD JKEL char(1);` akan...",
+    options: [
+      "Menambah record baru ke tabel Mahasiswa",
+      "Menambah kolom baru bernama JKEL ke tabel Mahasiswa",
+      "Mengubah nama tabel menjadi Mahasiswa",
+      "Menghapus kolom JKEL",
+    ],
+    answer: "Menambah kolom baru bernama JKEL ke tabel Mahasiswa",
+  },
+  {
+    id: 88,
+    question:
+      "Apa hasil dari query: `SELECT MIN(FINAL) FROM Nilai;` berdasarkan tabel contoh?",
+    options: ["0", "40", "55", "60"],
+    answer: "0",
+  },
+  {
+    id: 89,
+    question:
+      "Subquery `SELECT NIM FROM MAHASISWA WHERE NAMA='Astuti'` akan menghasilkan...",
+    options: [
+      "Nama dan NIM Astuti",
+      "Semua data Astuti",
+      "Hanya NIM Astuti",
+      "`True` atau `False`",
+    ],
+    answer: "Hanya NIM Astuti",
+  },
+  {
+    id: 90,
+    question:
+      "Karakteristik database terdistribusi di mana setiap DBMS berpartisipasi dalam sedikitnya satu aplikasi global berarti...",
+    options: [
+      "Setiap situs bekerja sendiri-sendiri",
+      "Ada kerjasama antar DBMS untuk tugas yang lebih besar",
+      "Semua aplikasi harus bersifat lokal",
+      "DBMS tidak bisa berkomunikasi",
+    ],
+    answer: "Ada kerjasama antar DBMS untuk tugas yang lebih besar",
+  },
+  {
+    id: 91,
+    question: "Dalam topologi `Ring Network`, kerugiannya adalah...",
+    options: [
+      "Jika pusat rusak, semua rusak",
+      "Biaya sangat mahal",
+      "Control management kurang terjamin karena bersifat desentralisasi",
+      "Reliability rendah",
+    ],
+    answer: "Control management kurang terjamin karena bersifat desentralisasi",
+  },
+  {
+    id: 92,
+    question:
+      "Untuk merekonstruksi relasi dari fragmentasi campuran, operasi apa yang umumnya terlibat?",
+    options: [
+      "Hanya `Join`",
+      "Hanya `Union`",
+      "`Join` dan `Union`",
+      "`Intersection` dan `Difference`",
+    ],
+    answer: "`Join` dan `Union`",
+  },
+  {
+    id: 93,
+    question: "`Uncommitted Update Problem` juga dikenal sebagai masalah...",
+    options: [
+      "`Dirty Read`",
+      "`Lost Update`",
+      "`Inconsistent Read`",
+      "`Phantom Read`",
+    ],
+    answer: "`Dirty Read`",
+  },
+  {
+    id: 94,
+    question:
+      "Kegagalan sistem di mana program tidak dapat dilanjutkan karena keadaan yang tidak diinginkan seperti `deadlock` disebut...",
+    options: ["Logical Error", "System Error", "System Crash", "Disk Failure"],
+    answer: "System Error",
+  },
+  {
+    id: 95,
+    question: "Integritas Referensi memastikan bahwa...",
+    options: [
+      "Nilai `foreign key` harus cocok dengan nilai `primary key` yang ada di tabel lain, atau bernilai `NULL`.",
+      "Nilai `primary key` tidak boleh `NULL`.",
+      "Semua data dalam satu kolom harus dari tipe data yang sama.",
+      "Tidak ada record duplikat dalam satu tabel.",
+    ],
+    answer:
+      "Nilai `foreign key` harus cocok dengan nilai `primary key` yang ada di tabel lain, atau bernilai `NULL`.",
+  },
+  {
+    id: 96,
+    question:
+      "Dalam SQL, `SELECT * FROM Mahasiswa, Nilai;` tanpa klausa `WHERE` atau `JOIN` akan menghasilkan...",
+    options: [
+      "Gabungan (`UNION`) dari kedua tabel",
+      "Irisan (`INTERSECT`) dari kedua tabel",
+      "`INNER JOIN` otomatis",
+      "`Cartesian Product` (produk silang)",
+    ],
+    answer: "`Cartesian Product` (produk silang)",
+  },
+  {
+    id: 97,
+    question: "Apa fungsi dari klausa `GROUP BY` dalam SQL?",
+    options: [
+      "Mengurutkan hasil query",
+      "Mengelompokkan baris yang memiliki nilai yang sama dalam kolom tertentu ke dalam baris ringkasan",
+      "Menyaring record berdasarkan kondisi tertentu",
+      "Menggabungkan hasil dari dua atau lebih `SELECT` statement",
+    ],
+    answer:
+      "Mengelompokkan baris yang memiliki nilai yang sama dalam kolom tertentu ke dalam baris ringkasan",
+  },
+  {
+    id: 98,
+    question:
+      "Dalam Aljabar Relasional, jika relasi R memiliki 5 atribut dan relasi S memiliki 3 atribut, berapa banyak atribut yang akan dimiliki oleh hasil dari `R X S` (Cartesian Product)?",
+    options: ["3", "5", "8", "15"],
+    answer: "8",
+  },
+  {
+    id: 99,
+    question:
+      "Manakah dari berikut ini yang BUKAN merupakan fungsi agregat standar di SQL?",
+    options: ["SUM", "AVG", "MEDIAN", "MAX"],
+    answer: "MEDIAN",
+  },
+  {
+    id: 100,
+    question: "Perintah `LOAD DATA INFILE` digunakan untuk...",
+    options: [
+      "Mengekspor data ke file eksternal",
+      "Mengimpor data dari file eksternal ke dalam tabel",
+      "Memuat ulang tabel setelah crash",
+      "Membuat salinan tabel",
+    ],
+    answer: "Mengimpor data dari file eksternal ke dalam tabel",
+  },
+
+  // --- SOAL PAKET P15 (ID 101-125) ---
+  {
+    id: 101,
+    question:
+      "Operasi menggabungkan operasi selection dan cartesian product dengan suatu kriteria pada kolom yang sama disebut:",
+    options: [
+      "Set intersection",
+      "Theta join",
+      "Natural join",
+      "Division",
+      "Cartesian product",
+    ],
+    answer: "Natural join",
+  },
+  {
+    id: 102,
+    question: "Operasi pembagian atas tuple-tuple dari 2 relation disebut:",
+    options: [
+      "Division",
+      "Theta Join",
+      "Cartesian product",
+      "Projection",
+      "Union",
+    ],
+    answer: "Division",
+  },
+  {
+    id: 103,
+    question:
+      "Untuk melengkapi sintaks 'CREATE ... MHS (NIM char(8) not null, NAMA char(25) not null)', bagian titik-titik diisi:",
+    options: ["Database", "Unique index", "View", "Procedure", "Table"],
+    answer: "Table",
+  },
+  {
+    id: 104,
+    question: "Perintah untuk merubah struktur table adalah:",
+    options: ["Create table", "Drop table", "Alter table", "Update", "Insert"],
+    answer: "Alter table",
+  },
+  {
+    id: 105,
+    question:
+      "Query-query yang digunakan untuk mendefinisikan struktur atau skema basis data disebut:",
+    options: [
+      "DDL",
+      "Alter Table",
+      "Data access",
+      "Data integrity",
+      "Auxiliary",
+    ],
+    answer: "DDL",
+  },
+  {
+    id: 106,
+    question: "Statement dalam Data Manipulation Language (DML) adalah:",
+    options: [
+      "INSERT",
+      "CREATE DATABASE",
+      "CREATE TABLE",
+      "DROP TABLE",
+      "CREATE INDEX",
+    ],
+    answer: "INSERT",
+  },
+  {
+    id: 107,
+    question:
+      "Mengirim nilai TRUE jika dan hanya jika terdapat sedikitnya satu baris di tabel hasil yang dikirim oleh subquery disebut:",
+    options: ["Not exist", "Exist", "Any", "All", "Select ... into outfile"],
+    answer: "Exist",
+  },
+  {
+    id: 108,
+    question:
+      "Untuk menarik hak akses dari pengguna dalam tabel digunakan perintah:",
+    options: ["Grant", "Give", "Load", "With option", "Revoke"],
+    answer: "Revoke",
+  },
+  {
+    id: 109,
+    question: "Yang termasuk fungsi aggregate adalah:",
+    options: ["Sum", "Rename table", "Load", "Revoke", "Recover table"],
+    answer: "Sum",
+  },
+  {
+    id: 110,
+    question: "Yang disebut dengan subquery adalah:",
+    options: [
+      "Klausa Order By tidak boleh digunakan di subquery",
+      "Klausa subquery Select harus berisi satu nama kolom tunggal",
+      "Subselect yang dapat digunakan di klausa WHERE dan HAVING untuk menghasilkan tabel akhir",
+      "Nama kolom di subquery mengacu ke nama tabel di klausa FROM dari subquery tersebut",
+      "Salah satu dua operan dilibatkan di pembandingan, subquery harus muncul disisi kanan",
+    ],
+    answer:
+      "Subselect yang dapat digunakan di klausa WHERE dan HAVING untuk menghasilkan tabel akhir",
+  },
+  {
+    id: 111,
+    question:
+      "Kumpulan data yang digunakan bersama yang saling terhubung secara logik tetapi tersebar secara fisik pada suatu jaringan komputer adalah:",
+    options: [
+      "Data Manipulation Language (DML)",
+      "Database terdistribusi",
+      "DBMS",
+      "RDBMS",
+      "SQL",
+    ],
+    answer: "Database terdistribusi",
+  },
+  {
+    id: 112,
+    question:
+      "Langkah yang diambil untuk menyebarkan data dalam basis data terdistribusi disebut:",
+    options: [
+      "Database terdistribusi",
+      "Locking",
+      "Fragmentasi data",
+      "Completeness",
+      "Reconstruction",
+    ],
+    answer: "Fragmentasi data",
+  },
+  {
+    id: 113,
+    question: "Untuk mengeksekusi sinkronisasi pada DB Designer:",
+    options: ["Start", "Connect", "Setup", "Execute", "Run"],
+    answer: "Execute",
+  },
+  {
+    id: 114,
+    question:
+      "DB Designer software perancangan basis data yang mempunyai antar muka berbentuk:",
+    options: ["GUI", "Command Line", "Structure Based", "Konseptual", "3D"],
+    answer: "GUI",
+  },
+  {
+    id: 115,
+    question:
+      "Salah satu alternatif mekanisme kontrol konkurensi yang dapat menghilangkan masalah deadlock adalah:",
+    options: ["Crass", "Recovery", "Security", "Exclusive", "Timestamping"],
+    answer: "Timestamping",
+  },
+  {
+    id: 116,
+    question: "Contoh non volatile storage adalah:",
+    options: ["RAM", "ROM", "Hardisk RAID", "Flashdisk", "Memory"],
+    answer: "Hardisk RAID",
+  },
+  {
+    id: 117,
+    question:
+      "Pemakai boleh menambah data baru, tetapi tidak dapat memodifikasi data yang sudah ada merupakan maksud dari:",
+    options: [
+      "Insert Authorization",
+      "Update Authorization",
+      "Alternation Authorization",
+      "Resource Authorization",
+      "Relasi",
+    ],
+    answer: "Insert Authorization",
+  },
+  {
+    id: 118,
+    question: "Memeriksa keakuratan dan validasi data disebut:",
+    options: ["Integrity", "Database", "Tabel", "DBMS", "Record"],
+    answer: "Integrity",
+  },
+  {
+    id: 119,
+    question: "Klasifikasi failure berdasarkan storage:",
+    options: [
+      "Crash, failure",
+      "Volatile, Non Volatile",
+      "Software Error, Hardware error",
+      "Logical error, System Error",
+      "Read, Insert",
+    ],
+    answer: "Volatile, Non Volatile",
+  },
+  {
+    id: 120,
+    question: "Suatu failure atau kegagalan dari suatu sistem disebut:",
+    options: ["Crash", "Recovery", "Integrity", "Database", "Record"],
+    answer: "Crash",
+  },
+  {
+    id: 121,
+    question:
+      "Suatu proteksi data terhadap perusakan data dan pemakaian oleh pemakai yang tidak mempunyai ijin disebut:",
+    options: ["Data", "Crash", "Recovery", "Security", "Integrity"],
+    answer: "Security",
+  },
+  {
+    id: 122,
+    question:
+      "Cara yang diberikan pada seorang pemakai untuk mendapatkan model database yang sesuai dengan kebutuhan perorangan disebut:",
+    options: ["Konsep View", "Crash", "Recovery", "Integrity", "Data"],
+    answer: "Konsep View",
+  },
+  {
+    id: 123,
+    question:
+      "Tingkatan masalah security yang berkaitan dengan keamanan sistem operasi yang digunakan dalam jaringan disebut:",
+    options: [
+      "Phisical",
+      "Sistem Operasi",
+      "Sistem Database",
+      "Man",
+      "User Friendly",
+    ],
+    answer: "Sistem Operasi",
+  },
+  {
+    id: 124,
+    question:
+      "Tingkatan masalah security berkaitan dengan pengamanan lokasi fisik database disebut:",
+    options: [
+      "Phisical",
+      "Sistem Operasi",
+      "Sistem Database",
+      "Man",
+      "User Friendly",
+    ],
+    answer: "Phisical",
+  },
+  {
+    id: 125,
+    question: "Kategori Penyalahgunaan Database yang tidak disengaja adalah:",
+    options: [
+      "Anomali yang disebabkan oleh pendistribusian data pada komputer",
+      "Insert oleh pihak yang tidak berwenang",
+      "Delete oleh pihak yang tidak berwenang",
+      "Update oleh pihak yang tidak berwenang",
+      "Drop oleh pihak yang tidak berwenang",
+    ],
+    answer: "Anomali yang disebabkan oleh pendistribusian data pada komputer",
+  },
+
+  // --- SOAL PAKET B (ID 126-155) ---
+  {
+    id: 126,
+    question:
+      "Operator himpunan dalam bahasa query formal yang menyatakan 'semua elemen yang ada di A dan B' adalah:",
+    options: ["Union", "Intersection", "Difference", "Join", "Select"],
+    answer: "Intersection",
+  },
+  {
+    id: 127,
+    question: "Operasi σ dalam relational algebra digunakan untuk:",
+    options: [
+      "Menyaring baris",
+      "Menyaring kolom",
+      "Menyaring tabel",
+      "Menggabungkan tabel",
+      "Menyalin data",
+    ],
+    answer: "Menyaring baris",
+  },
+  {
+    id: 128,
+    question: "Project (π) digunakan untuk:",
+    options: [
+      "Menyaring baris tertentu",
+      "Menghapus duplikasi baris",
+      "Mengambil atribut tertentu",
+      "Menggabungkan dua relasi",
+      "Menampilkan seluruh tabel",
+    ],
+    answer: "Mengambil atribut tertentu",
+  },
+  {
+    id: 129,
+    question:
+      "Yang bukan merupakan operator dasar dalam relasional algebra adalah:",
+    options: ["Select", "Project", "Join", "Rename", "Union"],
+    answer: "Join",
+  },
+  {
+    id: 130,
+    question: "σ(kota = 'Surabaya')(PELANGGAN) artinya:",
+    options: [
+      "Menampilkan semua kolom dari pelanggan di luar Surabaya",
+      "Menampilkan pelanggan yang tinggal di Surabaya",
+      "Menampilkan kolom kota",
+      "Menampilkan semua tabel",
+      "Menampilkan relasi kosong",
+    ],
+    answer: "Menampilkan pelanggan yang tinggal di Surabaya",
+  },
+  {
+    id: 131,
+    question: "Perintah untuk mengambil seluruh data dari tabel MAHASISWA:",
+    options: [
+      "SELECT ALL FROM MAHASISWA;",
+      "SELECT * FROM MAHASISWA;",
+      "GET ALL MAHASISWA;",
+      "SHOW MAHASISWA;",
+      "DISPLAY * FROM MAHASISWA;",
+    ],
+    answer: "SELECT * FROM MAHASISWA;",
+  },
+  {
+    id: 132,
+    question: "Perintah untuk menambahkan data baru adalah:",
+    options: ["SELECT", "INSERT", "UPDATE", "DELETE", "CREATE"],
+    answer: "INSERT",
+  },
+  {
+    id: 133,
+    question: "Untuk mengubah data digunakan perintah:",
+    options: ["ALTER", "DROP", "UPDATE", "INSERT", "MERGE"],
+    answer: "UPDATE",
+  },
+  {
+    id: 134,
+    question: "Statement DELETE FROM pelanggan WHERE id = 5; akan:",
+    options: [
+      "Menghapus semua data",
+      "Menghapus kolom id",
+      "Menghapus pelanggan dengan id 5",
+      "Tidak melakukan apa-apa",
+      "Menghapus tabel",
+    ],
+    answer: "Menghapus pelanggan dengan id 5",
+  },
+  {
+    id: 135,
+    question: "Fungsi agregat yang menghitung jumlah baris adalah:",
+    options: ["MAX", "MIN", "COUNT", "AVG", "SUM"],
+    answer: "COUNT",
+  },
+  {
+    id: 136,
+    question: "JOIN digunakan untuk:",
+    options: [
+      "Menghapus data",
+      "Menyalin data",
+      "Menggabungkan dua tabel",
+      "Menampilkan baris ganda",
+      "Membuat relasi baru",
+    ],
+    answer: "Menggabungkan dua tabel",
+  },
+  {
+    id: 137,
+    question:
+      "Jenis join yang menampilkan semua data kiri dan kanan meski tidak ada pasangan adalah:",
+    options: [
+      "INNER JOIN",
+      "RIGHT JOIN",
+      "LEFT JOIN",
+      "FULL OUTER JOIN",
+      "CROSS JOIN",
+    ],
+    answer: "FULL OUTER JOIN",
+  },
+  {
+    id: 138,
+    question: "INNER JOIN hanya menampilkan:",
+    options: [
+      "Data yang tidak berpasangan",
+      "Semua data kiri",
+      "Semua data kanan",
+      "Data yang cocok pada kedua tabel",
+      "Semua baris",
+    ],
+    answer: "Data yang cocok pada kedua tabel",
+  },
+  {
+    id: 139,
+    question: "LEFT JOIN akan menampilkan:",
+    options: [
+      "Hanya yang cocok di kedua tabel",
+      "Semua dari kanan",
+      "Semua dari kiri dan yang cocok dari kanan",
+      "Semua data",
+      "Data dari kanan saja",
+    ],
+    answer: "Semua dari kiri dan yang cocok dari kanan",
+  },
+  {
+    id: 140,
+    question: "Subquery adalah:",
+    options: [
+      "Fungsi bawaan",
+      "Query dalam query",
+      "Tipe kolom",
+      "Nama tabel",
+      "JOIN dua tabel",
+    ],
+    answer: "Query dalam query",
+  },
+  {
+    id: 141,
+    question: "DBDesigner adalah tools yang digunakan untuk:",
+    options: [
+      "Menjalankan query",
+      "Mendesain struktur basis data",
+      "Menghapus data",
+      "Menampilkan laporan",
+      "Menganalisis performa jaringan",
+    ],
+    answer: "Mendesain struktur basis data",
+  },
+  {
+    id: 142,
+    question: "Dalam ERD, simbol 'diamond' (belah ketupat) menyatakan:",
+    options: ["Entitas", "Atribut", "Relasi", "Primary key", "Foreign key"],
+    answer: "Relasi",
+  },
+  {
+    id: 143,
+    question: "Tujuan dari concurrency control adalah:",
+    options: [
+      "Meningkatkan performa aplikasi",
+      "Menyimpan file",
+      "Menyinkronkan akses ke data",
+      "Mencatat data log",
+      "Menghapus user",
+    ],
+    answer: "Menyinkronkan akses ke data",
+  },
+  {
+    id: 144,
+    question: "Masalah yang dapat timbul jika tidak ada concurrency control:",
+    options: ["File corrupt", "Deadlock", "Lost update", "Semua benar"],
+    answer: "Semua benar",
+  },
+  {
+    id: 145,
+    question: "Locking dalam basis data digunakan untuk:",
+    options: [
+      "Menyalakan sistem",
+      "Menolak query",
+      "Menghindari konflik akses data",
+      "Menyimpan log",
+      "Membatalkan transaksi",
+    ],
+    answer: "Menghindari konflik akses data",
+  },
+  {
+    id: 146,
+    question: "Recovery pada basis data bertujuan untuk:",
+    options: [
+      "Meningkatkan kecepatan",
+      "Mencegah virus",
+      "Mengembalikan database ke kondisi konsisten setelah kegagalan",
+      "Menghapus user",
+      "Kompres data",
+    ],
+    answer: "Mengembalikan database ke kondisi konsisten setelah kegagalan",
+  },
+  {
+    id: 147,
+    question: "Jenis kegagalan yang terjadi karena mati listrik adalah:",
+    options: [
+      "Transaction failure",
+      "System crash",
+      "Media failure",
+      "Logical error",
+      "Software bug",
+    ],
+    answer: "System crash",
+  },
+  {
+    id: 148,
+    question: "View dalam SQL digunakan untuk:",
+    options: [
+      "Menyimpan file",
+      "Membuat index",
+      "Menyimpan query sebagai virtual table",
+      "Mempercepat akses",
+      "Menghapus log",
+    ],
+    answer: "Menyimpan query sebagai virtual table",
+  },
+  {
+    id: 149,
+    question: "Perintah membuat view adalah:",
+    options: [
+      "CREATE VIRTUAL",
+      "CREATE VIEW",
+      "NEW VIEW",
+      "SELECT VIEW",
+      "FORM VIEW",
+    ],
+    answer: "CREATE VIEW",
+  },
+  {
+    id: 150,
+    question: "View digunakan untuk tujuan berikut, kecuali:",
+    options: [
+      "Menyembunyikan kolom sensitif",
+      "Mempermudah akses data",
+      "Mempercepat penyimpanan",
+      "Menyederhanakan query",
+      "Menyediakan level akses",
+    ],
+    answer: "Mempercepat penyimpanan",
+  },
+  {
+    id: 151,
+    question:
+      "Masalah timbul jika transaksi membaca suatu record yang sudah dimodifikasi oleh transaksi lain tetapi belum terselesaikan (uncommited) adalah:",
+    options: [
+      "Uncommited Update Problem",
+      "Lost Update Problem",
+      "Problem of inconsistency Analysis",
+      "Concurrency",
+      "Locking",
+    ],
+    answer: "Uncommited Update Problem",
+  },
+  {
+    id: 152,
+    question:
+      "Masalah ini timbul jika sebuah transaksi membaca suatu nilai tetapi transaksi yang kedua mengupdate beberapa nilai tersebut selama eksekusi transaksi pertama disebut:",
+    options: [
+      "Uncommited Update Problem",
+      "Lost Update Problem",
+      "Problem of inconsistency Analysis",
+      "Concurrency",
+      "Locking",
+    ],
+    answer: "Problem of inconsistency Analysis",
+  },
+  {
+    id: 153,
+    question:
+      "Masalah ini timbul jika dua transaksi mengakses item database yang sama yang mengakibatkan nilai dari database tersebut menjadi tidak benar:",
+    options: [
+      "Uncommited Update Problem",
+      "Lost Update Problem",
+      "Problem of inconsistency Analysis",
+      "Concurrency",
+      "Locking",
+    ],
+    answer: "Lost Update Problem",
+  },
+  {
+    id: 154,
+    question:
+      "Ketika sebuah transaksi memerlukan jaminan kalau record yang diinginkan tidak akan berubah secara mendadak, maka diperlukan:",
+    options: [
+      "Database",
+      "Konsep dasar locking",
+      "Locking",
+      "Jenis locking",
+      "Crass",
+    ],
+    answer: "Locking",
+  },
+  {
+    id: 155,
+    question:
+      "Kunci yang memungkinkan pengguna untuk membaca dan mengubah record, sementara pengguna lain tidak diperbolehkan, adalah:",
+    options: ["Crass", "Recovery", "Security", "Exclusive", "Timestamping"],
+    answer: "Exclusive",
+  },
+
+  // --- SOAL PAKET A (ID 156-183) ---
+  {
+    id: 156,
+    question: "π(nama, kota)(PELANGGAN) akan menghasilkan:",
+    options: [
+      "Semua atribut",
+      "Hanya baris tertentu",
+      "Atribut nama dan kota",
+      "Baris tanpa duplikat",
+      "Semua baris tanpa filter",
+    ],
+    answer: "Atribut nama dan kota",
+  },
+  {
+    id: 157,
+    question: "Join digunakan dalam relational algebra untuk:",
+    options: [
+      "Menyaring atribut",
+      "Menghapus tabel",
+      "Menyaring baris",
+      "Menggabungkan relasi berdasarkan atribut",
+      "Menambahkan kolom",
+    ],
+    answer: "Menggabungkan relasi berdasarkan atribut",
+  },
+  {
+    id: 158,
+    question:
+      "Yang termasuk operator gabungan dalam relational algebra adalah:",
+    options: ["Select", "Union", "Rename", "Projection", "Filter"],
+    answer: "Union",
+  },
+  {
+    id: 159,
+    question: "Select dan project adalah bagian dari:",
+    options: ["DDL", "DML", "SQL", "Algebra relasional", "View"],
+    answer: "Algebra relasional",
+  },
+  {
+    id: 160,
+    question: "Notasi π digunakan untuk:",
+    options: [
+      "Menyaring relasi",
+      "Menampilkan semua kolom",
+      "Memilih atribut tertentu",
+      "Menyaring data berdasarkan kondisi",
+      "Menghapus atribut",
+    ],
+    answer: "Memilih atribut tertentu",
+  },
+  {
+    id: 161,
+    question: "Kata kunci WHERE digunakan untuk:",
+    options: [
+      "Menyimpan data",
+      "Menyaring data",
+      "Mengurutkan data",
+      "Membuat tabel",
+      "Menggabungkan tabel",
+    ],
+    answer: "Menyaring data",
+  },
+  {
+    id: 162,
+    question: "Fungsi SQL untuk menghitung rata-rata:",
+    options: ["AVERAGE()", "AVG()", "COUNT()", "MEAN()", "MEDIAN()"],
+    answer: "AVG()",
+  },
+  {
+    id: 163,
+    question: "Untuk menampilkan data secara unik (tanpa duplikat):",
+    options: [
+      "SELECT *",
+      "SELECT ONLY",
+      "SELECT UNIQUE",
+      "SELECT DISTINCT",
+      "SELECT AVG",
+    ],
+    answer: "SELECT DISTINCT",
+  },
+  {
+    id: 164,
+    question: "ORDER BY digunakan untuk:",
+    options: [
+      "Menghapus data",
+      "Mengurutkan data",
+      "Menyaring data",
+      "Menambahkan data",
+      "Menyalin data",
+    ],
+    answer: "Mengurutkan data",
+  },
+  {
+    id: 165,
+    question: "Query `SELECT * FROM siswa WHERE usia BETWEEN 10 AND 15;` akan:",
+    options: [
+      "Menampilkan siswa dengan usia di bawah 10",
+      "Menampilkan semua siswa",
+      "Menampilkan siswa usia 10–15",
+      "Menampilkan usia 10 saja",
+      "Menampilkan siswa yang bukan usia 10–15",
+    ],
+    answer: "Menampilkan siswa usia 10–15",
+  },
+  {
+    id: 166,
+    question: "Subquery sering digunakan dalam klausa:",
+    options: ["INSERT", "UPDATE", "SELECT", "ALTER", "CREATE"],
+    answer: "SELECT",
+  },
+  {
+    id: 167,
+    question: "Subquery harus diapit oleh:",
+    options: ["{}", "[]", '""', "()", "<>"],
+    answer: "()",
+  },
+  {
+    id: 168,
+    question: "Subquery bisa diletakkan di klausa:",
+    options: ["WHERE", "FROM", "SELECT", "Semua benar", "Hanya SELECT"],
+    answer: "Semua benar",
+  },
+  {
+    id: 169,
+    question: "EXISTS dalam subquery akan:",
+    options: [
+      "Mengembalikan jumlah data",
+      "Menyaring nilai NULL",
+      "Mengecek keberadaan baris",
+      "Menghapus baris",
+      "Membandingkan kolom",
+    ],
+    answer: "Mengecek keberadaan baris",
+  },
+  {
+    id: 170,
+    question: "Subquery yang mengembalikan lebih dari satu nilai:",
+    options: [
+      "Harus menggunakan IN atau operator sejenis",
+      "Akan menyebabkan Error",
+      "Diperbolehkan di semua pernyataan",
+      "Tidak berguna",
+      "Hanya pada DELETE",
+    ],
+    answer: "Harus menggunakan IN atau operator sejenis",
+  },
+  {
+    id: 171,
+    question: "Atribut yang menjadi pengenal unik pada entitas disebut:",
+    options: [
+      "Foreign Key",
+      "Primary Key",
+      "Composite Key",
+      "Relational Key",
+      "Common Key",
+    ],
+    answer: "Primary Key",
+  },
+  {
+    id: 172,
+    question: "Relasi one-to-many dalam desain basis data ditandai dengan:",
+    options: ["1:1", "1:M", "M:N", "1:∞", "M:1"],
+    answer: "1:M",
+  },
+  {
+    id: 173,
+    question: "Shared lock memungkinkan:",
+    options: [
+      "Beberapa transaksi membaca data",
+      "Satu transaksi menulis",
+      "Tidak ada yang bisa mengakses",
+      "Hanya backup",
+      "Tidak bisa membaca atau menulis",
+    ],
+    answer: "Beberapa transaksi membaca data",
+  },
+  {
+    id: 174,
+    question: "Exclusive lock digunakan saat:",
+    options: [
+      "Membaca data",
+      "Melihat struktur tabel",
+      "Menulis atau mengubah data",
+      "Menyimpan log",
+      "Export data",
+    ],
+    answer: "Menulis atau mengubah data",
+  },
+  {
+    id: 175,
+    question: "Rollback dilakukan jika:",
+    options: [
+      "Transaksi berhasil",
+      "Data sudah disimpan",
+      "Terjadi error",
+      "Backup selesai",
+      "Semua table sudah dibaca",
+    ],
+    answer: "Terjadi error",
+  },
+  {
+    id: 176,
+    question: "Transaksi yang belum selesai dan gagal akan:",
+    options: ["Di-backup", "Dihapus", "Di-restart", "Diabaikan", "Di-rollback"],
+    answer: "Di-rollback",
+  },
+  {
+    id: 177,
+    question: "Data integrity mengacu pada:",
+    options: [
+      "Kecepatan query",
+      "Konsistensi dan keakuratan data",
+      "Desain interface",
+      "Log program",
+      "Backup otomatis",
+    ],
+    answer: "Konsistensi dan keakuratan data",
+  },
+  {
+    id: 178,
+    question: "Salah satu bentuk integrity constraint adalah:",
+    options: ["Primary key", "CSS", "INNER JOIN", "UNION", "SELECT *"],
+    answer: "Primary key",
+  },
+  {
+    id: 179,
+    question: "Keamanan basis data mencakup hal berikut, kecuali:",
+    options: ["Autentikasi", "Otorisasi", "Enkripsi", "Indexing", "Backup"],
+    answer: "Indexing",
+  },
+  {
+    id: 180,
+    question: "Autentikasi adalah proses untuk:",
+    options: [
+      "Menyalakan sistem",
+      "Memberi hak akses",
+      "Memverifikasi identitas pengguna",
+      "Menyimpan data",
+      "Backup log",
+    ],
+    answer: "Memverifikasi identitas pengguna",
+  },
+  {
+    id: 181,
+    question: "Untuk membatasi akses ke kolom tertentu digunakan:",
+    options: ["DELETE", "SELECT", "VIEW", "COMMIT", "ALTER"],
+    answer: "VIEW",
+  },
+  {
+    id: 182,
+    question: "FOREIGN KEY menjaga:",
+    options: [
+      "Privasi data",
+      "Kecepatan",
+      "Integritas referensial",
+      "Index tabel",
+      "Backup log",
+    ],
+    answer: "Integritas referensial",
+  },
+  {
+    id: 183,
+    question: "Integrity constraints diperlukan agar:",
+    options: [
+      "Sistem lebih cepat",
+      "Data tetap akurat dan konsisten",
+      "Query lebih mudah",
+      "Backup otomatis",
+      "Data dapat dihapus cepat",
+    ],
+    answer: "Data tetap akurat dan konsisten",
+  },
+];
+
+// --- Variabel dan Elemen DOM ---
+let currentQuestionIndex = 0;
+let score = 0;
+let selectedPacketQuestions = [];
+let userAnswers = [];
+let selectedAnswer = null;
+let timerInterval = null;
+
+const screens = {
+  start: document.getElementById("start-screen"),
+  packetSelection: document.getElementById("packet-selection-screen"),
+  quiz: document.getElementById("quiz-screen"),
+  result: document.getElementById("result-screen"),
+  review: document.getElementById("review-screen"),
+};
+
+const modal = {
+  overlay: document.getElementById("confirmation-modal"),
+  title: document.getElementById("modal-title"),
+  text: document.getElementById("modal-text"),
+  confirmButton: document.getElementById("modal-confirm-button"),
+  cancelButton: document.getElementById("modal-cancel-button"),
+};
+
+const startButton = document.getElementById("start-button");
+const packetButtons = document.querySelectorAll(".packet-button");
+const nextButton = document.getElementById("next-button");
+const restartButton = document.getElementById("restart-button");
+const reviewButton = document.getElementById("review-button");
+const backToResultButton = document.getElementById("back-to-result-button");
+const backToStartButton = document.getElementById("back-to-start-button");
+const quizBackButton = document.getElementById("quiz-back-button");
+
+const questionCounter = document.getElementById("question-counter");
+const timerDisplay = document.getElementById("timer");
+const progressBar = document.getElementById("progress-bar");
+const questionText = document.getElementById("question-text");
+const optionsContainer = document.getElementById("options-container");
+
+const scoreText = document.getElementById("score-text");
+const scoreBar = document.getElementById("score-bar");
+const feedbackContainer = document.getElementById("feedback-container");
+const reviewContainer = document.getElementById("review-container");
+
+// --- Fungsi-Fungsi Aplikasi ---
+
+function showScreen(screenId) {
+  Object.values(screens).forEach((screen) => screen.classList.remove("active"));
+  screens[screenId].classList.add("active");
+}
+
+function showConfirmationModal(title, text, onConfirm) {
+  modal.title.innerText = title;
+  modal.text.innerText = text;
+  modal.overlay.classList.add("active");
+
+  modal.confirmButton.onclick = () => {
+    modal.overlay.classList.remove("active");
+    onConfirm();
+  };
+  modal.cancelButton.onclick = () => {
+    modal.overlay.classList.remove("active");
+  };
+}
+
+function selectPacket(packetType) {
+  let duration = 0;
+  let packetName = "";
+
+  if (packetType === "a") {
+    selectedPacketQuestions = quizQuestions.slice(155, 183);
+    duration = 30 * 60; // 30 menit
+    packetName = "Paket A";
+  } else if (packetType === "b") {
+    selectedPacketQuestions = quizQuestions.slice(125, 155);
+    duration = 30 * 60; // 30 menit
+    packetName = "Paket B";
+  } else if (packetType === "p15") {
+    selectedPacketQuestions = quizQuestions.slice(100, 125);
+    duration = 25 * 60; // 25 menit
+    packetName = "Paket P15";
+  } else if (packetType === "1") {
+    selectedPacketQuestions = quizQuestions.slice(0, 50);
+    duration = 50 * 60; // 50 menit
+    packetName = "Paket 1";
+  } else if (packetType === "2") {
+    selectedPacketQuestions = quizQuestions.slice(50, 100);
+    duration = 50 * 60; // 50 menit
+    packetName = "Paket 2";
+  } else {
+    // 'all'
+    selectedPacketQuestions = [...quizQuestions].sort(
+      () => Math.random() - 0.5
+    );
+    duration = 120 * 60; // 120 menit
+    packetName = "Semua Soal";
+  }
+
+  showConfirmationModal(
+    `Mulai ${packetName}?`,
+    `Anda akan memiliki waktu ${
+      duration / 60
+    } menit untuk menyelesaikan kuis ini. Apakah Anda siap?`,
+    () => startQuiz(duration)
+  );
+}
+
+function startQuiz(duration) {
+  showScreen("quiz");
+  currentQuestionIndex = 0;
+  score = 0;
+  userAnswers = [];
+  selectedAnswer = null;
+  startTimer(duration);
+  loadQuestion();
+}
+
+function startTimer(duration) {
+  let timeLeft = duration;
+  clearInterval(timerInterval);
+  timerInterval = setInterval(() => {
+    const minutes = Math.floor(timeLeft / 60);
+    let seconds = timeLeft % 60;
+    seconds = seconds < 10 ? "0" + seconds : seconds;
+
+    timerDisplay.innerText = `${minutes}:${seconds}`;
+
+    if (--timeLeft < 0) {
+      clearInterval(timerInterval);
+      showResult(); // Waktu habis
+    }
+  }, 1000);
+}
+
+function loadQuestion() {
+  selectedAnswer = null;
+  nextButton.disabled = true;
+
+  const currentQuestion = selectedPacketQuestions[currentQuestionIndex];
+  const totalQuestions = selectedPacketQuestions.length;
+
+  questionCounter.innerText = `Soal ${
+    currentQuestionIndex + 1
+  } dari ${totalQuestions}`;
+  const progressPercentage =
+    ((currentQuestionIndex + 1) / totalQuestions) * 100;
+  progressBar.style.width = `${progressPercentage}%`;
+
+  questionText.innerText = currentQuestion.question;
+
+  optionsContainer.innerHTML = "";
+  currentQuestion.options.forEach((option, index) => {
+    const button = document.createElement("button");
+    button.innerHTML = `<span class="font-semibold">${String.fromCharCode(
+      65 + index
+    )}.</span> ${option}`;
+    button.className =
+      "p-4 rounded-lg text-left w-full transition-all duration-200 border-2 bg-slate-700 border-slate-600 hover:bg-slate-600 hover:border-slate-500";
+    button.onclick = () => handleAnswerSelect(option, button);
+    optionsContainer.appendChild(button);
+  });
+
+  // Disable tombol kembali jika di soal pertama
+  quizBackButton.disabled = currentQuestionIndex === 0;
+}
+
+function handleAnswerSelect(option, buttonElement) {
+  selectedAnswer = option;
+  nextButton.disabled = false;
+  Array.from(optionsContainer.children).forEach((btn) => {
+    btn.className =
+      "p-4 rounded-lg text-left w-full transition-all duration-200 border-2 bg-slate-700 border-slate-600 hover:bg-slate-600 hover:border-slate-500";
+  });
+  buttonElement.className =
+    "p-4 rounded-lg text-left w-full transition-all duration-200 border-2 bg-sky-500 border-sky-400 scale-105 shadow-lg";
+}
+
+function handleNextQuestion() {
+  const currentQuestion = selectedPacketQuestions[currentQuestionIndex];
+  // Simpan jawaban bahkan jika tidak dijawab (null)
+  userAnswers[currentQuestionIndex] = selectedAnswer;
+
+  if (selectedAnswer === currentQuestion.answer) {
+    // Cek apakah ini jawaban baru atau perbaikan dari soal sebelumnya
+    // This logic is simplified; for a robust system, you'd track scores differently
+    // For now, we assume simple incrementing.
+    // To prevent re-scoring, we could check if a score for this index was already given.
+  }
+  // Recalculate score from scratch to handle back-and-forth navigation correctly
+  score = 0;
+  for (let i = 0; i < userAnswers.length; i++) {
+    if (
+      userAnswers[i] &&
+      userAnswers[i] === selectedPacketQuestions[i].answer
+    ) {
+      score++;
+    }
+  }
+
+  if (currentQuestionIndex < selectedPacketQuestions.length - 1) {
+    currentQuestionIndex++;
+    loadQuestion();
+  } else {
+    clearInterval(timerInterval);
+    showResult();
+  }
+}
+
+function showResult() {
+  showScreen("result");
+  const totalQuestions = selectedPacketQuestions.length;
+
+  // Final score calculation
+  let finalScore = 0;
+  for (let i = 0; i < totalQuestions; i++) {
+    if (userAnswers[i] === selectedPacketQuestions[i].answer) {
+      finalScore++;
+    }
+  }
+
+  const percentage =
+    totalQuestions > 0 ? Math.round((finalScore / totalQuestions) * 100) : 0;
+  let feedback = {
+    text: "Perlu Belajar Lagi",
+    color: "text-red-400",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2.25m0 4.5h.008v.008H12v-.008zm0-9a9 9 0 100 18 9 9 0 000-18z" /></svg>`,
+  };
+
+  if (percentage >= 90) {
+    feedback = {
+      text: "Luar Biasa!",
+      color: "text-green-400",
+      icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M12 10.5c.99 0 1.875.315 2.625.831m-5.25 0A4.492 4.492 0 0112 10.5" /><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12c0 4.142-3.358 7.5-7.5 7.5s-7.5-3.358-7.5-7.5 3.358-7.5 7.5-7.5 7.5 3.358 7.5 7.5z" /></svg>`,
+    };
+  } else if (percentage >= 70) {
+    feedback = {
+      text: "Bagus!",
+      color: "text-yellow-400",
+      icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8"><path stroke-linecap="round" stroke-linejoin="round" d="M12 17.25c2.485 0 4.5-2.015 4.5-4.5s-2.015-4.5-4.5-4.5-4.5 2.015-4.5 4.5 2.015 4.5 4.5 4.5z" /><circle cx="12" cy="12" r="9" /></svg>`,
+    };
+  }
+
+  feedbackContainer.innerHTML = `${feedback.icon} <span>${feedback.text}</span>`;
+  feedbackContainer.className = `flex items-center justify-center gap-2 text-2xl font-bold mb-4 ${feedback.color}`;
+
+  scoreText.innerHTML = `Anda berhasil menjawab <span class="text-sky-400 font-bold text-2xl">${finalScore}</span> dari <span class="font-bold text-2xl">${totalQuestions}</span> soal.`;
+  scoreBar.style.width = `${percentage}%`;
+  scoreBar.innerText = `${percentage}%`;
+}
+
+function showReview() {
+  showScreen("review");
+  reviewContainer.innerHTML = "";
+  selectedPacketQuestions.forEach((question, index) => {
+    const userAnswer = userAnswers[index];
+    const isCorrect = userAnswer === question.answer;
+
+    const reviewItem = document.createElement("div");
+    reviewItem.className = `p-4 rounded-lg border-l-4 ${
+      isCorrect
+        ? "border-green-500 bg-slate-700/50"
+        : "border-red-500 bg-slate-700/50"
+    }`;
+
+    const icon = isCorrect
+      ? `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-400 inline-block mr-2" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>`
+      : `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-400 inline-block mr-2" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>`;
+
+    reviewItem.innerHTML = `
+                  <p class="font-bold text-lg mb-2">Soal ${question.id}: ${
+      question.question
+    }</p>
+                  <p class="text-sm ${
+                    isCorrect ? "text-green-400" : "text-red-400"
+                  }">${icon}Jawaban Anda: <span class="font-semibold">${
+      userAnswer || "Tidak dijawab"
+    }</span></p>
+                  ${
+                    !isCorrect
+                      ? `<p class="text-sm text-sky-400 mt-1"><span class="font-bold">Jawaban Benar:</span> ${question.answer}</p>`
+                      : ""
+                  }
+              `;
+    reviewContainer.appendChild(reviewItem);
+  });
+}
+
+// --- Event Listeners ---
+document.addEventListener("DOMContentLoaded", () => {
+  const screens = {
+    start: document.getElementById("start-screen"),
+    packetSelection: document.getElementById("packet-selection-screen"),
+    quiz: document.getElementById("quiz-screen"),
+    result: document.getElementById("result-screen"),
+    review: document.getElementById("review-screen"),
+  };
+
+  const modal = {
+    overlay: document.getElementById("confirmation-modal"),
+    title: document.getElementById("modal-title"),
+    text: document.getElementById("modal-text"),
+    confirmButton: document.getElementById("modal-confirm-button"),
+    cancelButton: document.getElementById("modal-cancel-button"),
+  };
+
+  const startButton = document.getElementById("start-button");
+  const packetButtons = document.querySelectorAll(".packet-button");
+  const nextButton = document.getElementById("next-button");
+  const restartButton = document.getElementById("restart-button");
+  const reviewButton = document.getElementById("review-button");
+  const backToResultButton = document.getElementById("back-to-result-button");
+  const backToStartButton = document.getElementById("back-to-start-button");
+  const quizBackButton = document.getElementById("quiz-back-button");
+
+  startButton.addEventListener("click", () => showScreen("packetSelection"));
+  backToStartButton.addEventListener("click", () => showScreen("start"));
+
+  packetButtons.forEach((button) => {
+    button.addEventListener("click", (e) => {
+      const packet = e.currentTarget.getAttribute("data-packet");
+      selectPacket(packet);
+    });
+  });
+
+  nextButton.addEventListener("click", handleNextQuestion);
+
+  quizBackButton.addEventListener("click", () => {
+    if (currentQuestionIndex > 0) {
+      currentQuestionIndex--;
+      loadQuestion();
+      // Restore previous answer if it exists
+      const previousAnswer = userAnswers[currentQuestionIndex];
+      if (previousAnswer) {
+        selectedAnswer = previousAnswer;
+        nextButton.disabled = false;
+        // Highlight the previously selected option
+        Array.from(optionsContainer.children).forEach((button) => {
+          if (button.innerText.includes(previousAnswer)) {
+            button.className =
+              "p-4 rounded-lg text-left w-full transition-all duration-200 border-2 bg-sky-500 border-sky-400 scale-105 shadow-lg";
+          } else {
+            button.className =
+              "p-4 rounded-lg text-left w-full transition-all duration-200 border-2 bg-slate-700 border-slate-600 hover:bg-slate-600 hover:border-slate-500";
+          }
+        });
+      }
+    }
+  });
+
+  restartButton.addEventListener("click", () => {
+    showConfirmationModal(
+      "Ulangi Latihan?",
+      "Anda akan kembali ke halaman pemilihan paket. Progres saat ini akan hilang.",
+      () => showScreen("packetSelection")
+    );
+  });
+
+  reviewButton.addEventListener("click", showReview);
+  backToResultButton.addEventListener("click", () => showScreen("result"));
+
+  // Initial call
+  showScreen("start");
+});
