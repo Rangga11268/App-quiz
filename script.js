@@ -1,12 +1,17 @@
 document.addEventListener("DOMContentLoaded", () => {
   // --- Variabel Global & Elemen DOM ---
-  let quizQuestions = []; // Akan diisi dari file JSON
+  let quizQuestions = [];
   let currentQuestionIndex = 0;
-  let score = 0;
   let selectedPacketQuestions = [];
   let userAnswers = [];
+  let incorrectQuestions = [];
+  let currentPacketInfo = {};
   let selectedAnswer = null;
   let timerInterval = null;
+  let timeLeft = 0;
+  let lastQuizForReview = null; // **BARU**: Menyimpan snapshot kuis untuk pembahasan
+
+  const ACTIVE_QUIZ_STATE_KEY = "activeQuizState";
 
   const screens = {
     start: document.getElementById("start-screen"),
@@ -14,6 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
     quiz: document.getElementById("quiz-screen"),
     result: document.getElementById("result-screen"),
     review: document.getElementById("review-screen"),
+    history: document.getElementById("history-screen"),
   };
 
   const modal = {
@@ -24,111 +30,146 @@ document.addEventListener("DOMContentLoaded", () => {
     cancelButton: document.getElementById("modal-cancel-button"),
   };
 
-  const startButton = document.getElementById("start-button");
-  const packetButtons = document.querySelectorAll(".packet-button");
-  const nextButton = document.getElementById("next-button");
-  const restartButton = document.getElementById("restart-button");
-  const reviewButton = document.getElementById("review-button");
-  const backToResultButton = document.getElementById("back-to-result-button");
-  const backToStartButton = document.getElementById("back-to-start-button");
-  const quizBackButton = document.getElementById("quiz-back-button");
-
-  const questionCounter = document.getElementById("question-counter");
   const timerDisplay = document.getElementById("timer");
-  const progressBar = document.getElementById("progress-bar");
-  const questionText = document.getElementById("question-text");
-  const optionsContainer = document.getElementById("options-container");
 
-  const scoreText = document.getElementById("score-text");
-  const scoreBar = document.getElementById("score-bar");
-  const feedbackContainer = document.getElementById("feedback-container");
-  const reviewContainer = document.getElementById("review-container");
+  // --- FUNGSI MANAJEMEN STATE ---
+
+  function saveQuizState() {
+    const state = {
+      selectedPacketQuestions,
+      currentQuestionIndex,
+      userAnswers,
+      timeLeft,
+      currentPacketInfo,
+    };
+    localStorage.setItem(ACTIVE_QUIZ_STATE_KEY, JSON.stringify(state));
+  }
+
+  function clearQuizState() {
+    localStorage.removeItem(ACTIVE_QUIZ_STATE_KEY);
+  }
+
+  function restoreQuizState() {
+    const savedStateJSON = localStorage.getItem(ACTIVE_QUIZ_STATE_KEY);
+    if (!savedStateJSON) return false;
+
+    const savedState = JSON.parse(savedStateJSON);
+
+    selectedPacketQuestions = savedState.selectedPacketQuestions;
+    currentQuestionIndex = savedState.currentQuestionIndex;
+    userAnswers = savedState.userAnswers;
+    timeLeft = savedState.timeLeft;
+    currentPacketInfo = savedState.currentPacketInfo;
+
+    showScreen("quiz");
+    startTimer(timeLeft);
+    loadQuestion();
+
+    showConfirmationModal(
+      "Sesi Dilanjutkan",
+      `Selamat datang kembali! Anda melanjutkan sesi "${currentPacketInfo.name}".`,
+      () => {},
+      "Lanjutkan"
+    );
+
+    return true;
+  }
 
   // --- Definisi Fungsi Aplikasi ---
 
   function showScreen(screenId) {
-    Object.values(screens).forEach((screen) =>
-      screen.classList.remove("active")
-    );
-    if (screens[screenId]) {
-      screens[screenId].classList.add("active");
-    }
+    Object.values(screens).forEach((s) => s.classList.remove("active"));
+    if (screens[screenId]) screens[screenId].classList.add("active");
   }
 
-  function showConfirmationModal(title, text, onConfirm) {
+  function showConfirmationModal(
+    title,
+    text,
+    onConfirm,
+    confirmText = "Konfirmasi"
+  ) {
     modal.title.innerText = title;
     modal.text.innerText = text;
+    modal.confirmButton.innerText = confirmText;
     modal.overlay.classList.add("active");
-
     modal.confirmButton.onclick = () => {
       modal.overlay.classList.remove("active");
       onConfirm();
     };
-    modal.cancelButton.onclick = () => {
-      modal.overlay.classList.remove("active");
-    };
+    modal.cancelButton.onclick = () => modal.overlay.classList.remove("active");
   }
 
   function selectPacket(packetType) {
+    let packetInfo = { type: packetType, name: "", questions: [] };
     let duration = 0;
-    let packetName = "";
 
     if (packetType === "a") {
-      selectedPacketQuestions = quizQuestions.slice(155, 183);
+      packetInfo.name = "Paket A";
+      packetInfo.questions = quizQuestions.slice(155, 183);
       duration = 30 * 60;
-      packetName = "Paket A";
     } else if (packetType === "b") {
-      selectedPacketQuestions = quizQuestions.slice(125, 155);
+      packetInfo.name = "Paket B";
+      packetInfo.questions = quizQuestions.slice(125, 155);
       duration = 30 * 60;
-      packetName = "Paket B";
     } else if (packetType === "p15") {
-      selectedPacketQuestions = quizQuestions.slice(100, 125);
+      packetInfo.name = "Paket P15";
+      packetInfo.questions = quizQuestions.slice(100, 125);
       duration = 25 * 60;
-      packetName = "Paket P15";
     } else if (packetType === "1") {
-      selectedPacketQuestions = quizQuestions.slice(0, 50);
+      packetInfo.name = "Paket 1";
+      packetInfo.questions = quizQuestions.slice(0, 50);
       duration = 50 * 60;
-      packetName = "Paket 1";
     } else if (packetType === "2") {
-      selectedPacketQuestions = quizQuestions.slice(50, 100);
+      packetInfo.name = "Paket 2";
+      packetInfo.questions = quizQuestions.slice(50, 100);
       duration = 50 * 60;
-      packetName = "Paket 2";
+    } else if (packetType === "incorrect") {
+      packetInfo.name = `Soal Salah dari ${lastQuizForReview.packetInfo.name}`;
+      packetInfo.questions = [...incorrectQuestions];
+      duration = Math.ceil((packetInfo.questions.length * 90) / 60) * 60;
     } else {
-      selectedPacketQuestions = [...quizQuestions].sort(
-        () => Math.random() - 0.5
-      );
+      packetInfo.name = "Semua Soal (Acak)";
+      packetInfo.questions = [...quizQuestions].sort(() => Math.random() - 0.5);
       duration = 120 * 60;
-      packetName = "Semua Soal";
     }
 
+    currentPacketInfo = { name: packetInfo.name };
     showConfirmationModal(
-      `Mulai ${packetName}?`,
-      `Anda akan memiliki waktu ${
-        duration / 60
-      } menit untuk menyelesaikan kuis ini. Apakah Anda siap?`,
-      () => startQuiz(duration)
+      `Mulai ${packetInfo.name}?`,
+      `Anda akan memiliki waktu ${duration / 60} menit. Siap?`,
+      () => startQuiz(packetInfo.questions, duration),
+      "Mulai"
     );
   }
 
-  function startQuiz(duration) {
-    showScreen("quiz");
+  function startQuiz(questions, duration) {
+    selectedPacketQuestions = questions;
     currentQuestionIndex = 0;
-    score = 0;
     userAnswers = new Array(selectedPacketQuestions.length).fill(null);
     selectedAnswer = null;
+    timeLeft = duration;
+    showScreen("quiz");
     startTimer(duration);
     loadQuestion();
+    saveQuizState();
   }
 
   function startTimer(duration) {
-    let timeLeft = duration;
     clearInterval(timerInterval);
-    timerInterval = setInterval(() => {
-      const minutes = Math.floor(timeLeft / 60);
-      let seconds = timeLeft % 60;
-      seconds = seconds < 10 ? "0" + seconds : seconds;
+    timeLeft = duration;
+
+    const updateTimer = () => {
+      const minutes = String(Math.floor(timeLeft / 60)).padStart(2, "0");
+      const seconds = String(timeLeft % 60).padStart(2, "0");
       timerDisplay.innerText = `${minutes}:${seconds}`;
-      if (--timeLeft < 0) {
+    };
+
+    updateTimer();
+
+    timerInterval = setInterval(() => {
+      timeLeft--;
+      updateTimer();
+      if (timeLeft < 0) {
         clearInterval(timerInterval);
         showResult();
       }
@@ -137,43 +178,49 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function loadQuestion() {
     selectedAnswer = null;
-    nextButton.disabled = true;
-
     const currentQuestion = selectedPacketQuestions[currentQuestionIndex];
-    const totalQuestions = selectedPacketQuestions.length;
-
-    questionCounter.innerText = `Soal ${
+    document.getElementById("question-counter").innerText = `Soal ${
       currentQuestionIndex + 1
-    } dari ${totalQuestions}`;
-    const progressPercentage =
-      ((currentQuestionIndex + 1) / totalQuestions) * 100;
-    progressBar.style.width = `${progressPercentage}%`;
-    questionText.innerText = currentQuestion.question;
+    } dari ${selectedPacketQuestions.length}`;
+    document.getElementById("progress-bar").style.width = `${
+      ((currentQuestionIndex + 1) / selectedPacketQuestions.length) * 100
+    }%`;
+    document.getElementById("question-text").innerText =
+      currentQuestion.question;
 
+    const optionsContainer = document.getElementById("options-container");
     optionsContainer.innerHTML = "";
     currentQuestion.options.forEach((option, index) => {
       const button = document.createElement("button");
       button.innerHTML = `<span class="font-semibold">${String.fromCharCode(
         65 + index
       )}.</span> ${option}`;
-      button.className =
-        "p-4 rounded-lg text-left w-full transition-all duration-200 border-2 bg-slate-700 border-slate-600 hover:bg-slate-600 hover:border-slate-500";
+      button.className = "option-button";
       button.onclick = () => handleAnswerSelect(option, button);
       optionsContainer.appendChild(button);
     });
 
-    quizBackButton.disabled = currentQuestionIndex === 0;
+    const previousAnswer = userAnswers[currentQuestionIndex];
+    if (previousAnswer) {
+      const selectedBtn = Array.from(optionsContainer.children).find((btn) =>
+        btn.innerText.includes(previousAnswer)
+      );
+      handleAnswerSelect(previousAnswer, selectedBtn);
+    } else {
+      document.getElementById("next-button").disabled = true;
+    }
+
+    document.getElementById("quiz-back-button").disabled =
+      currentQuestionIndex === 0;
   }
 
   function handleAnswerSelect(option, buttonElement) {
     selectedAnswer = option;
-    nextButton.disabled = false;
-    Array.from(optionsContainer.children).forEach((btn) => {
-      btn.className =
-        "p-4 rounded-lg text-left w-full transition-all duration-200 border-2 bg-slate-700 border-slate-600 hover:bg-slate-600 hover:border-slate-500";
-    });
-    buttonElement.className =
-      "p-4 rounded-lg text-left w-full transition-all duration-200 border-2 bg-sky-500 border-sky-400 scale-105 shadow-lg";
+    document.getElementById("next-button").disabled = false;
+    document
+      .querySelectorAll(".option-button")
+      .forEach((btn) => btn.classList.remove("selected"));
+    if (buttonElement) buttonElement.classList.add("selected");
   }
 
   function handleNextQuestion() {
@@ -181,55 +228,111 @@ document.addEventListener("DOMContentLoaded", () => {
     if (currentQuestionIndex < selectedPacketQuestions.length - 1) {
       currentQuestionIndex++;
       loadQuestion();
+      saveQuizState();
     } else {
-      clearInterval(timerInterval);
       showResult();
     }
   }
 
   function showResult() {
-    showScreen("result");
-    const totalQuestions = selectedPacketQuestions.length;
-    let finalScore = 0;
-    for (let i = 0; i < totalQuestions; i++) {
-      if (userAnswers[i] === selectedPacketQuestions[i].answer) {
-        finalScore++;
-      }
-    }
-    const percentage =
-      totalQuestions > 0 ? Math.round((finalScore / totalQuestions) * 100) : 0;
-    let feedback = {
-      text: "Perlu Belajar Lagi",
-      color: "text-red-400",
-      icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2.25m0 4.5h.008v.008H12v-.008zm0-9a9 9 0 100 18 9 9 0 000-18z" /></svg>`,
+    clearInterval(timerInterval);
+
+    // **PERBAIKAN**: Ambil snapshot state kuis untuk halaman pembahasan dan hasil
+    lastQuizForReview = {
+      questions: [...selectedPacketQuestions],
+      answers: [...userAnswers],
+      packetInfo: { ...currentPacketInfo },
     };
 
-    if (percentage >= 90) {
-      feedback = {
-        text: "Luar Biasa!",
-        color: "text-green-400",
-        icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75" /><circle cx="12" cy="12" r="9" /></svg>`,
-      };
-    } else if (percentage >= 70) {
-      feedback = {
-        text: "Bagus!",
-        color: "text-yellow-400",
-        icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8"><path stroke-linecap="round" stroke-linejoin="round" d="M12 17.25c2.485 0 4.5-2.015 4.5-4.5s-2.015-4.5-4.5-4.5-4.5 2.015-4.5 4.5 2.015 4.5 4.5 4.5z" /><circle cx="12" cy="12" r="9" /></svg>`,
-      };
+    clearQuizState(); // Hapus state dari localStorage setelah kuis selesai
+
+    let finalScore = 0;
+    incorrectQuestions = [];
+    lastQuizForReview.questions.forEach((q, i) => {
+      if (lastQuizForReview.answers[i] === q.answer) {
+        finalScore++;
+      } else {
+        incorrectQuestions.push(q);
+      }
+    });
+
+    const total = lastQuizForReview.questions.length;
+    const percentage = total > 0 ? Math.round((finalScore / total) * 100) : 0;
+    if (
+      lastQuizForReview.packetInfo.name &&
+      !lastQuizForReview.packetInfo.name.includes("Soal Salah")
+    ) {
+      saveHistory(finalScore, total, percentage);
     }
 
-    feedbackContainer.innerHTML = `${feedback.icon} <span>${feedback.text}</span>`;
-    feedbackContainer.className = `flex items-center justify-center gap-2 text-2xl font-bold mb-4 ${feedback.color}`;
-    scoreText.innerHTML = `Anda berhasil menjawab <span class="text-sky-400 font-bold text-2xl">${finalScore}</span> dari <span class="font-bold text-2xl">${totalQuestions}</span> soal.`;
+    document.getElementById(
+      "score-text"
+    ).innerHTML = `Anda berhasil menjawab <span class="text-sky-400 font-bold text-2xl">${finalScore}</span> dari <span class="font-bold text-2xl">${total}</span> soal.`;
+    const scoreBar = document.getElementById("score-bar");
     scoreBar.style.width = `${percentage}%`;
     scoreBar.innerText = `${percentage}%`;
+
+    const retryBtn = document.getElementById("retry-incorrect-button");
+    if (incorrectQuestions.length > 0) {
+      retryBtn.classList.remove("hidden");
+    } else {
+      retryBtn.classList.add("hidden");
+    }
+
+    showScreen("result");
   }
 
+  function saveHistory(score, total, percentage) {
+    const history = JSON.parse(localStorage.getItem("quizHistory")) || [];
+    const newResult = {
+      packetName: currentPacketInfo.name,
+      score,
+      total,
+      percentage,
+      date: new Date().toISOString(),
+    };
+    history.unshift(newResult);
+    if (history.length > 20) history.pop();
+    localStorage.setItem("quizHistory", JSON.stringify(history));
+  }
+
+  function showHistory() {
+    const history = JSON.parse(localStorage.getItem("quizHistory")) || [];
+    const container = document.getElementById("history-container");
+    container.innerHTML = "";
+    if (history.length === 0) {
+      container.innerHTML = `<p class="text-slate-400 text-center">Belum ada riwayat tes.</p>`;
+    } else {
+      history.forEach((result) => {
+        const date = new Date(result.date).toLocaleString("id-ID", {
+          dateStyle: "long",
+          timeStyle: "short",
+        });
+        const item = document.createElement("div");
+        item.className =
+          "bg-slate-700 p-4 rounded-lg border-l-4 " +
+          (result.percentage >= 70 ? "border-green-500" : "border-red-500");
+        item.innerHTML = `<div class="flex justify-between items-center"><div><p class="font-bold text-lg">${result.packetName}</p><p class="text-sm text-slate-400">${date}</p></div><p class="text-2xl font-bold">${result.percentage}%</p></div><p class="text-right mt-1 text-slate-300">Skor: ${result.score} / ${result.total}</p>`;
+        container.appendChild(item);
+      });
+    }
+    showScreen("history");
+  }
+
+  // **PERBAIKAN**: Fungsi pembahasan sekarang menggunakan data snapshot
   function showReview() {
-    showScreen("review");
+    const reviewContainer = document.getElementById("review-container");
     reviewContainer.innerHTML = "";
-    selectedPacketQuestions.forEach((question, index) => {
-      const userAnswer = userAnswers[index];
+
+    if (!lastQuizForReview || lastQuizForReview.questions.length === 0) {
+      reviewContainer.innerHTML =
+        '<p class="text-slate-400 text-center">Tidak ada data pembahasan untuk ditampilkan.</p>';
+      showScreen("review");
+      return;
+    }
+
+    lastQuizForReview.questions.forEach((question, index) => {
+      const userAnswer = lastQuizForReview.answers[index];
       const isCorrect = userAnswer === question.answer;
       const reviewItem = document.createElement("div");
       reviewItem.className = `p-4 rounded-lg border-l-4 ${
@@ -257,55 +360,105 @@ document.addEventListener("DOMContentLoaded", () => {
       `;
       reviewContainer.appendChild(reviewItem);
     });
+    showScreen("review");
   }
 
   function setupEventListeners() {
-    startButton.addEventListener("click", () => showScreen("packetSelection"));
-    backToStartButton.addEventListener("click", () => showScreen("start"));
-    packetButtons.forEach((button) => {
-      button.addEventListener("click", (e) => {
-        const packet = e.currentTarget.getAttribute("data-packet");
-        selectPacket(packet);
+    document
+      .getElementById("start-button")
+      .addEventListener("click", () => showScreen("packetSelection"));
+    document
+      .getElementById("history-button")
+      .addEventListener("click", showHistory);
+    document
+      .getElementById("back-to-start-button")
+      .addEventListener("click", () => showScreen("start"));
+    document
+      .getElementById("back-to-start-from-history")
+      .addEventListener("click", () => showScreen("start"));
+    document
+      .querySelectorAll(".packet-button")
+      .forEach((b) =>
+        b.addEventListener("click", (e) =>
+          selectPacket(e.currentTarget.dataset.packet)
+        )
+      );
+    document
+      .getElementById("next-button")
+      .addEventListener("click", handleNextQuestion);
+
+    document
+      .getElementById("quiz-back-button")
+      .addEventListener("click", () => {
+        if (currentQuestionIndex > 0) {
+          userAnswers[currentQuestionIndex] = selectedAnswer;
+          currentQuestionIndex--;
+          loadQuestion();
+          saveQuizState();
+        }
       });
-    });
-    nextButton.addEventListener("click", handleNextQuestion);
-    restartButton.addEventListener("click", () => {
+
+    document
+      .getElementById("surrender-button")
+      .addEventListener("click", () => {
+        showConfirmationModal(
+          "Yakin ingin menyerah?",
+          "Progres kuis ini akan dihitung nilainya.",
+          () => showResult(),
+          "Ya, Menyerah"
+        );
+      });
+
+    document.getElementById("restart-button").addEventListener("click", () => {
+      clearQuizState();
       showConfirmationModal(
         "Ulangi Latihan?",
-        "Anda akan kembali ke halaman pemilihan paket. Progres saat ini akan hilang.",
-        () => showScreen("packetSelection")
+        "Pilih paket soal untuk memulai lagi.",
+        () => showScreen("packetSelection"),
+        "Mulai Lagi"
       );
     });
-    reviewButton.addEventListener("click", showReview);
-    backToResultButton.addEventListener("click", () => showScreen("result"));
-    quizBackButton.addEventListener("click", () => {
-      if (currentQuestionIndex > 0) {
-        currentQuestionIndex--;
-        loadQuestion();
+
+    document
+      .getElementById("review-button")
+      .addEventListener("click", showReview);
+    document
+      .getElementById("retry-incorrect-button")
+      .addEventListener("click", () => selectPacket("incorrect"));
+    document
+      .getElementById("back-to-result-button")
+      .addEventListener("click", () => showScreen("result"));
+
+    const reviewContainer = document.getElementById("review-container");
+    const backToTopBtn = document.getElementById("back-to-top-button");
+    backToTopBtn.addEventListener("click", () => {
+      reviewContainer.scrollTo({ top: 0, behavior: "smooth" });
+    });
+    reviewContainer.addEventListener("scroll", () => {
+      backToTopBtn.classList.toggle("hidden", reviewContainer.scrollTop < 200);
+    });
+
+    window.addEventListener("beforeunload", () => {
+      if (screens.quiz.classList.contains("active")) {
+        saveQuizState();
       }
     });
   }
 
   // --- Eksekusi Utama ---
-  fetch("public/questions.json")
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      return response.json();
-    })
+  fetch("/public/questions.json")
+    .then((res) => (res.ok ? res.json() : Promise.reject(res)))
     .then((data) => {
       quizQuestions = data;
       setupEventListeners();
-      showScreen("start"); // Tampilkan layar awal setelah semua siap
+      if (!restoreQuizState()) {
+        showScreen("start");
+      }
     })
     .catch((error) => {
-      console.error("Gagal memuat file questions.json:", error);
-      document.getElementById("app-container").innerHTML = `
-        <div class="text-center text-red-400">
-          <h1 class="text-2xl font-bold">Error</h1>
-          <p>Gagal memuat data soal. Pastikan file 'questions.json' ada di folder yang sama dengan 'index.html'.</p>
-        </div>
-      `;
+      console.error("Gagal memuat questions.json:", error);
+      document.getElementById(
+        "app-container"
+      ).innerHTML = `<div class="text-center text-red-400"><h1 class="text-2xl font-bold">Error</h1><p>Gagal memuat data soal. Pastikan file 'questions.json' ada di folder yang sama.</p></div>`;
     });
 });

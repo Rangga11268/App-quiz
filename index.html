@@ -44,16 +44,20 @@
           </svg>
           <h1 class="text-4xl md:text-5xl font-bold mb-2">Latihan UAS</h1>
           <p class="text-2xl text-slate-300 mb-6">Konsep Basis Data</p>
-          <p class="text-slate-400 mb-8">
-            Uji pemahaman Anda dengan soal-soal pilihan ganda yang dibagi per
-            paket.
-          </p>
-          <button
-            id="start-button"
-            class="bg-sky-500 hover:bg-sky-600 text-white font-bold py-3 px-8 rounded-lg text-xl transition-all duration-300 transform hover:scale-105 shadow-lg"
-          >
-            Mulai
-          </button>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <button
+              id="start-button"
+              class="bg-sky-500 hover:bg-sky-600 text-white font-bold py-3 px-8 rounded-lg text-xl transition-all duration-300 transform hover:scale-105 shadow-lg"
+            >
+              Mulai Latihan
+            </button>
+            <button
+              id="history-button"
+              class="bg-slate-600 hover:bg-slate-700 text-white font-bold py-3 px-8 rounded-lg text-xl transition-all duration-300 transform hover:scale-105 shadow-lg"
+            >
+              Lihat Histori
+            </button>
+          </div>
         </div>
       </div>
 
@@ -65,41 +69,38 @@
           <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             <button
               data-packet="a"
-              class="packet-button bg-gradient-to-br from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-bold py-6 px-4 rounded-lg text-lg transition-all duration-300 transform hover:-translate-y-1 shadow-lg"
+              class="packet-button bg-gradient-to-br from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700"
             >
-              Paket A
-              <span class="block text-sm font-normal">(28 Soal)</span>
+              Paket A <span class="block text-sm font-normal">(28 Soal)</span>
             </button>
             <button
               data-packet="b"
-              class="packet-button bg-gradient-to-br from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white font-bold py-6 px-4 rounded-lg text-lg transition-all duration-300 transform hover:-translate-y-1 shadow-lg"
+              class="packet-button bg-gradient-to-br from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700"
             >
-              Paket B
-              <span class="block text-sm font-normal">(30 Soal)</span>
+              Paket B <span class="block text-sm font-normal">(30 Soal)</span>
             </button>
             <button
               data-packet="p15"
-              class="packet-button bg-gradient-to-br from-lime-500 to-yellow-600 hover:from-lime-600 hover:to-yellow-700 text-white font-bold py-6 px-4 rounded-lg text-lg transition-all duration-300 transform hover:-translate-y-1 shadow-lg"
+              class="packet-button bg-gradient-to-br from-lime-500 to-yellow-600 hover:from-lime-600 hover:to-yellow-700"
             >
-              Paket P15
-              <span class="block text-sm font-normal">(25 Soal)</span>
+              Paket P15 <span class="block text-sm font-normal">(25 Soal)</span>
             </button>
             <button
               data-packet="1"
-              class="packet-button bg-gradient-to-br from-teal-500 to-cyan-600 hover:from-teal-600 hover:to-cyan-700 text-white font-bold py-6 px-4 rounded-lg text-lg transition-all duration-300 transform hover:-translate-y-1 shadow-lg"
+              class="packet-button bg-gradient-to-br from-teal-500 to-cyan-600 hover:from-teal-600 hover:to-cyan-700"
             >
-              Paket 1 <span class="block text-sm font-normal">(Soal 1-50)</span>
+              Paket 1 <span class="block text-sm font-normal">(50 Soal)</span>
             </button>
             <button
               data-packet="2"
-              class="packet-button bg-gradient-to-br from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white font-bold py-6 px-4 rounded-lg text-lg transition-all duration-300 transform hover:-translate-y-1 shadow-lg"
+              class="packet-button bg-gradient-to-br from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700"
             >
               Paket 2
-              <span class="block text-sm font-normal">(Soal 51-100)</span>
+              <span class="block text-sm font-normal">(50 Soal)</span>
             </button>
             <button
               data-packet="all"
-              class="packet-button bg-gradient-to-br from-rose-500 to-red-600 hover:from-rose-600 hover:to-red-700 text-white font-bold py-6 px-4 rounded-lg text-lg transition-all duration-300 transform hover:-translate-y-1 shadow-lg"
+              class="packet-button bg-gradient-to-br from-rose-500 to-red-600 hover:from-rose-600 hover:to-red-700"
             >
               Acak Semua Soal
               <span class="block text-sm font-normal">(183 Soal)</span>
@@ -118,27 +119,9 @@
         <div
           class="bg-slate-800 p-6 md:p-8 rounded-2xl shadow-2xl max-w-3xl w-full border border-slate-700 mx-auto"
         >
-          <div class="flex justify-between items-center mb-6">
-            <button
-              id="quiz-back-button"
-              class="text-sky-400 hover:text-sky-300 font-semibold flex items-center gap-1 transition-colors"
-              type="button"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-6 w-6 inline"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M15 19l-7-7 7-7"
-                />
-              </svg>
-              Kembali
+          <div class="flex justify-between items-center mb-6 gap-2">
+            <button id="quiz-back-button" class="nav-button" type="button">
+              ‹ Kembali
             </button>
             <p id="question-counter" class="text-sky-400 font-semibold"></p>
             <div
@@ -157,18 +140,17 @@
           </div>
           <h2
             id="question-text"
-            class="text-xl md:text-2xl font-medium mb-6 leading-relaxed"
+            class="text-xl md:text-2xl font-medium mb-6 leading-relaxed min-h-[100px]"
           ></h2>
           <div
             id="options-container"
             class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8"
           ></div>
-          <div class="text-right">
-            <button
-              id="next-button"
-              disabled
-              class="bg-sky-500 text-white font-bold py-3 px-10 rounded-lg text-lg transition-all duration-300 disabled:bg-slate-600 disabled:cursor-not-allowed disabled:text-slate-400 hover:bg-sky-600"
-            >
+          <div class="flex justify-between items-center mt-8">
+             <button id="surrender-button" class="nav-button-danger" type="button">
+              Menyerah
+            </button>
+            <button id="next-button" disabled class="action-button">
               Selanjutnya
             </button>
           </div>
@@ -195,16 +177,16 @@
             </div>
           </div>
           <div class="flex flex-col md:flex-row gap-4 justify-center">
-            <button
-              id="review-button"
-              class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-8 rounded-lg text-xl transition-all duration-300 transform hover:scale-105 shadow-lg"
-            >
+            <button id="review-button" class="action-button-green">
               Lihat Pembahasan
             </button>
             <button
-              id="restart-button"
-              class="bg-sky-500 hover:bg-sky-600 text-white font-bold py-3 px-8 rounded-lg text-xl transition-all duration-300 transform hover:scale-105 shadow-lg"
+              id="retry-incorrect-button"
+              class="action-button-yellow hidden"
             >
+              Ulangi Soal Salah
+            </button>
+            <button id="restart-button" class="action-button">
               Coba Lagi
             </button>
           </div>
@@ -213,7 +195,7 @@
 
       <div id="review-screen" class="screen w-full">
         <div
-          class="bg-slate-800 p-6 md:p-8 rounded-2xl shadow-2xl max-w-4xl w-full border border-slate-700 mx-auto flex flex-col"
+          class="bg-slate-800 p-6 md:p-8 rounded-2xl shadow-2xl max-w-4xl w-full border border-slate-700 mx-auto flex flex-col relative"
           style="height: 90vh"
         >
           <h2 class="text-3xl font-bold mb-6 text-center">Pembahasan Soal</h2>
@@ -222,11 +204,29 @@
             class="review-container flex-grow overflow-y-auto pr-4 space-y-6"
           ></div>
           <div class="text-center mt-6">
-            <button
-              id="back-to-result-button"
-              class="bg-sky-500 hover:bg-sky-600 text-white font-bold py-3 px-8 rounded-lg text-xl transition-all duration-300 transform hover:scale-105 shadow-lg"
-            >
+            <button id="back-to-result-button" class="action-button">
               Kembali ke Hasil
+            </button>
+          </div>
+          <button id="back-to-top-button" class="back-to-top-button hidden">
+            🔼
+          </button>
+        </div>
+      </div>
+
+      <div id="history-screen" class="screen w-full">
+        <div
+          class="bg-slate-800 p-6 md:p-8 rounded-2xl shadow-2xl max-w-4xl w-full border border-slate-700 mx-auto flex flex-col"
+          style="height: 90vh"
+        >
+          <h2 class="text-3xl font-bold mb-6 text-center">Histori Tes</h2>
+          <div
+            id="history-container"
+            class="flex-grow overflow-y-auto pr-4 space-y-4"
+          ></div>
+          <div class="text-center mt-6">
+            <button id="back-to-start-from-history" class="action-button">
+              Kembali ke Menu
             </button>
           </div>
         </div>
@@ -250,9 +250,9 @@
             </button>
             <button
               id="modal-confirm-button"
-              class="bg-sky-500 hover:bg-sky-600 text-white font-bold py-2 px-6 rounded-lg transition-colors"
+              class="bg-rose-500 hover:bg-rose-600 text-white font-bold py-2 px-6 rounded-lg transition-colors"
             >
-              Ya, Mulai
+              Konfirmasi
             </button>
           </div>
         </div>
@@ -262,7 +262,6 @@
         <p>Dibuat Oleh Darell Rangga.</p>
       </footer>
     </div>
-
     <script src="script.js"></script>
   </body>
 </html>
