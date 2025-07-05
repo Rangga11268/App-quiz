@@ -446,7 +446,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // --- Eksekusi Utama ---
-  fetch("public/questions.json")
+  fetch("/questions.json")
     .then((res) => (res.ok ? res.json() : Promise.reject(res)))
     .then((data) => {
       quizQuestions = data;
