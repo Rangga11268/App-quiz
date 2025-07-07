@@ -518,9 +518,14 @@
   },
   {
     "id": 58,
-    "question": "Berdasarkan tabel contoh di PDF, query `SELECT * FROM Nilai WHERE MID >= 70 AND FINAL >= 75;` akan menghasilkan berapa baris?",
-    "options": ["2 baris", "3 baris", "4 baris", "5 baris"],
-    "answer": "3 baris"
+    "question": "Dalam SQL, klausa mana yang digunakan untuk mengurutkan hasil query secara menurun (dari terbesar ke terkecil)?",
+    "options": [
+      "ORDER BY ... ASC",
+      "ORDER BY ... DESC",
+      "SORT BY ... DESC",
+      "GROUP BY ... DESC"
+    ],
+    "answer": "ORDER BY ... DESC"
   },
   {
     "id": 59,
@@ -535,9 +540,9 @@
   },
   {
     "id": 60,
-    "question": "Jika tabel `tb_kota` di-`RIGHT JOIN` dengan tabel `tb_provinsi` dari contoh di PDF, provinsi mana yang akan muncul meskipun tidak punya padanan kota?",
-    "options": ["DKI Jakarta", "Jawa Tengah", "Papua Barat", "Jawa Barat"],
-    "answer": "Papua Barat"
+    "question": "Manakah dari berikut ini yang merupakan contoh dari Data Definition Language (DDL)?",
+    "options": ["INSERT", "UPDATE", "SELECT", "CREATE TABLE"],
+    "answer": "CREATE TABLE"
   },
   {
     "id": 61,
@@ -818,9 +823,9 @@
   },
   {
     "id": 88,
-    "question": "Berdasarkan tabel contoh di PDF, apa hasil dari query: `SELECT MIN(FINAL) FROM Nilai;`?",
-    "options": ["0", "40", "55", "60"],
-    "answer": "0"
+    "question": "Fungsi agregat yang digunakan untuk mencari nilai terendah dalam sebuah kolom adalah:",
+    "options": ["MIN()", "MAX()", "LOW()", "AVG()"],
+    "answer": "MIN()"
   },
   {
     "id": 89,
@@ -959,7 +964,13 @@
   {
     "id": 102,
     "question": "Operasi pembagian atas tuple-tuple dari 2 relation disebut:",
-    "options": ["Division", "Theta Join", "Cartesian product", "Projection", "Union"],
+    "options": [
+      "Division",
+      "Theta Join",
+      "Cartesian product",
+      "Projection",
+      "Union"
+    ],
     "answer": "Division"
   },
   {
@@ -971,13 +982,25 @@
   {
     "id": 104,
     "question": "Perintah untuk merubah struktur tabel adalah:",
-    "options": ["Create table", "Drop table", "Alter table", "Update", "Insert"],
+    "options": [
+      "Create table",
+      "Drop table",
+      "Alter table",
+      "Update",
+      "Insert"
+    ],
     "answer": "Alter table"
   },
   {
     "id": 105,
     "question": "Query-query yang digunakan untuk mendefinisikan struktur atau skema basis data disebut:",
-    "options": ["DDL", "Alter Table", "Data access", "Data integrity", "Auxiliary"],
+    "options": [
+      "DDL",
+      "Alter Table",
+      "Data access",
+      "Data integrity",
+      "Auxiliary"
+    ],
     "answer": "DDL"
   },
   {
@@ -1048,7 +1071,7 @@
   },
   {
     "id": 113,
-    "question": "Untuk mengeksekusi sinkronisasi pada DB Designer, pilih menu:",
+    "question": "Untuk mengeksekusi sinkronisasi pada DB Designer, menu yang dipilih adalah:",
     "options": ["Start", "Connect", "Setup", "Execute", "Run"],
     "answer": "Execute"
   },
