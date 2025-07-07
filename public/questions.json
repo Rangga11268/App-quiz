@@ -118,9 +118,9 @@
     "question": "Salah satu keuntungan dari basis data terdistribusi adalah...",
     "options": [
       "Kompleksitas yang rendah",
-      "Harga software yang murah",
+      "Harga software yang mahal",
       "Adanya otonomi lokal",
-      "Keamanan data yang lebih terjamin"
+      "Sulitnya menjaga keutuhan data"
     ],
     "answer": "Adanya otonomi lokal"
   },
@@ -131,7 +131,7 @@
       "Peningkatan kinerja",
       "Pertumbuhan yang modular",
       "Kompleksitas dan kelemahan dalam keamanan",
-      "Peningkatan ketersediaan data"
+      "Peningkatan ketersediaan"
     ],
     "answer": "Kompleksitas dan kelemahan dalam keamanan"
   },
@@ -159,24 +159,24 @@
   },
   {
     "id": 19,
-    "question": "Proses pembagian database di mana database dipecah-pecah berdasarkan kolom dan baris untuk disimpan di site yang berbeda disebut...",
+    "question": "Proses pembagian database dimana database dipecah-pecah berdasarkan kolom dan baris untuk disimpan di site yang berbeda disebut...",
     "options": ["Replikasi", "Normalisasi", "Fragmentasi", "Indeksasi"],
     "answer": "Fragmentasi"
   },
   {
     "id": 20,
-    "question": "Alasan diperlukannya fragmentasi data adalah untuk, kecuali...",
+    "question": "Alasan diperlukannya fragmentasi data adalah sebagai berikut, kecuali...",
     "options": [
-      "Efisiensi, karena data disimpan dekat dengan pengguna",
+      "Efisiensi",
       "Meningkatkan redundansi data",
-      "Paralelisme, untuk meningkatkan konkurensi",
-      "Keamanan, karena data yang tidak perlu tidak disimpan lokal"
+      "Paralelisme",
+      "Keamanan"
     ],
     "answer": "Meningkatkan redundansi data"
   },
   {
     "id": 21,
-    "question": "Aturan fragmentasi yang menyatakan bahwa sebuah relasi asli harus dapat dibuat kembali dari fragmen-fragmennya disebut...",
+    "question": "Aturan fragmentasi yang menyatakan bahwa sebuah relasi asli harus dapat digabungkan kembali dari fragmen-fragmennya disebut...",
     "options": [
       "Kondisi lengkap (Completeness)",
       "Rekonstruksi (Reconstruction)",
@@ -187,7 +187,7 @@
   },
   {
     "id": 22,
-    "question": "Jenis fragmentasi yang memecah relasi menjadi beberapa sub-set tupel (baris) berdasarkan suatu predikat adalah...",
+    "question": "Jenis fragmentasi yang memecah relasi menjadi beberapa sub-set tupel (baris) adalah...",
     "options": [
       "Fragmentasi Vertikal",
       "Fragmentasi Horizontal",
@@ -243,7 +243,7 @@
   },
   {
     "id": 28,
-    "question": "Ketika sebuah transaksi membaca suatu record yang sudah dimodifikasi oleh transaksi lain tetapi belum di-commit, masalah ini disebut...",
+    "question": "Ketika sebuah transaksi membaca record yang sudah dimodifikasi oleh transaksi lain tetapi belum di-commit, masalah ini disebut...",
     "options": [
       "Masalah Modifikasi Sementara (Uncommitted Update Problem)",
       "Masalah Kehilangan Modifikasi (Lost Update Problem)",
@@ -260,25 +260,25 @@
   },
   {
     "id": 30,
-    "question": "Jenis kunci (lock) yang memungkinkan pengguna dan pengguna lain membaca record tetapi tidak mengubahnya adalah...",
+    "question": "Jenis kunci (lock) yang memungkinkan beberapa pengguna membaca record yang sama secara bersamaan tetapi tidak mengubahnya adalah...",
     "options": ["Exclusive (X)", "Primary (P)", "Shared (S)", "Read-only (R)"],
     "answer": "Shared (S)"
   },
   {
     "id": 31,
-    "question": "Jenis kunci (lock) yang memungkinkan pengguna untuk membaca dan mengubah record, sementara pengguna lain tidak diperbolehkan membaca ataupun mengubahnya adalah...",
+    "question": "Jenis kunci (lock) yang memungkinkan pengguna membaca dan mengubah record, sementara pengguna lain tidak bisa mengaksesnya sama sekali, adalah...",
     "options": ["Shared (S)", "Exclusive (X)", "Write (W)", "Update (U)"],
     "answer": "Exclusive (X)"
   },
   {
     "id": 32,
-    "question": "Alternatif mekanisme kontrol konkurensi selain locking yang dapat menghilangkan masalah deadlock adalah...",
+    "question": "Mekanisme kontrol konkurensi alternatif selain locking yang dapat menghilangkan masalah deadlock adalah...",
     "options": ["Recovery", "Security", "Two-phase commit", "Timestamping"],
     "answer": "Timestamping"
   },
   {
     "id": 33,
-    "question": "Menurut klasifikasi failure berdasarkan jenis storage, `RAM` termasuk dalam kategori...",
+    "question": "Menurut klasifikasi failure berdasarkan jenis storage, RAM termasuk dalam kategori...",
     "options": [
       "Volatile storage",
       "Non-volatile storage",
@@ -407,14 +407,14 @@
   },
   {
     "id": 47,
-    "question": "Apa yang dimaksud dengan `Integritas Referensi`?",
+    "question": "Berdasarkan PDF, apa yang dimaksud dengan `Integritas Referensi`?",
     "options": [
       "Tidak ada komponen kunci primer yang bernilai null",
-      "Suatu domain dapat dipakai sebagai kunci primer jika merupakan atribut tunggal pada domain tersebut",
+      "Suatu domain dapat dipakai sebagai kunci primer bila merupakan atribut tunggal pada domain yang bersangkutan",
       "Semua data harus akurat dan valid",
       "Setiap foreign key harus merujuk ke primary key yang ada atau bernilai null"
     ],
-    "answer": "Suatu domain dapat dipakai sebagai kunci primer jika merupakan atribut tunggal pada domain tersebut"
+    "answer": "Suatu domain dapat dipakai sebagai kunci primer bila merupakan atribut tunggal pada domain yang bersangkutan"
   },
   {
     "id": 48,
@@ -457,7 +457,7 @@
   },
   {
     "id": 52,
-    "question": "Ekspresi Aljabar Relasional untuk menampilkan semua mahasiswa yang tinggal di 'DEPOK' dan berjenis kelamin 'LAKI-LAKI' adalah...",
+    "question": "Ekspresi Aljabar Relasional untuk menampilkan mahasiswa yang tinggal di 'DEPOK' DAN berjenis kelamin 'LAKI-LAKI' adalah...",
     "options": [
       "σ Alamat='DEPOK' ∨ J_KEL='LAKI-LAKI' (MAHASISWA)",
       "σ Alamat='DEPOK' ∧ J_KEL='LAKI-LAKI' (MAHASISWA)",
@@ -485,7 +485,7 @@
   },
   {
     "id": 55,
-    "question": "Sintaks SQL untuk mengubah nama kolom `Nfak` menjadi `NoFaktur` pada tabel `faktur` adalah...",
+    "question": "Sintaks SQL untuk mengubah nama kolom `Nfak` menjadi `NoFaktur` dan tipenya menjadi `char(4)` pada tabel `faktur` adalah...",
     "options": [
       "ALTER TABLE faktur MODIFY COLUMN NoFaktur char(4);",
       "ALTER TABLE faktur DROP COLUMN Nfak;",
@@ -518,7 +518,7 @@
   },
   {
     "id": 58,
-    "question": "Query `SELECT * FROM Nilai WHERE MID >= 70 AND FINAL >= 75;` akan menghasilkan berapa baris?",
+    "question": "Berdasarkan tabel contoh di PDF, query `SELECT * FROM Nilai WHERE MID >= 70 AND FINAL >= 75;` akan menghasilkan berapa baris?",
     "options": ["2 baris", "3 baris", "4 baris", "5 baris"],
     "answer": "3 baris"
   },
@@ -535,7 +535,7 @@
   },
   {
     "id": 60,
-    "question": "Jika tabel `tb_kota` di-`RIGHT JOIN` dengan tabel `tb_provinsi`, provinsi mana yang akan muncul meskipun tidak punya padanan kota?",
+    "question": "Jika tabel `tb_kota` di-`RIGHT JOIN` dengan tabel `tb_provinsi` dari contoh di PDF, provinsi mana yang akan muncul meskipun tidak punya padanan kota?",
     "options": ["DKI Jakarta", "Jawa Tengah", "Papua Barat", "Jawa Barat"],
     "answer": "Papua Barat"
   },
@@ -818,7 +818,7 @@
   },
   {
     "id": 88,
-    "question": "Apa hasil dari query: `SELECT MIN(FINAL) FROM Nilai;` berdasarkan tabel contoh?",
+    "question": "Berdasarkan tabel contoh di PDF, apa hasil dari query: `SELECT MIN(FINAL) FROM Nilai;`?",
     "options": ["0", "40", "55", "60"],
     "answer": "0"
   },
@@ -892,12 +892,12 @@
     "id": 95,
     "question": "Integritas Referensi memastikan bahwa...",
     "options": [
-      "Nilai `foreign key` harus cocok dengan nilai `primary key` yang ada di tabel lain, atau bernilai `NULL`.",
-      "Nilai `primary key` tidak boleh `NULL`.",
+      "Nilai foreign key harus cocok dengan nilai primary key yang ada di tabel lain, atau bernilai NULL.",
+      "Nilai primary key tidak boleh NULL.",
       "Semua data dalam satu kolom harus dari tipe data yang sama.",
       "Tidak ada record duplikat dalam satu tabel."
     ],
-    "answer": "Nilai `foreign key` harus cocok dengan nilai `primary key` yang ada di tabel lain, atau bernilai `NULL`."
+    "answer": "Nilai foreign key harus cocok dengan nilai primary key yang ada di tabel lain, atau bernilai NULL."
   },
   {
     "id": 96,
@@ -959,13 +959,7 @@
   {
     "id": 102,
     "question": "Operasi pembagian atas tuple-tuple dari 2 relation disebut:",
-    "options": [
-      "Division",
-      "Theta Join",
-      "Cartesian product",
-      "Projection",
-      "Union"
-    ],
+    "options": ["Division", "Theta Join", "Cartesian product", "Projection", "Union"],
     "answer": "Division"
   },
   {
@@ -977,25 +971,13 @@
   {
     "id": 104,
     "question": "Perintah untuk merubah struktur tabel adalah:",
-    "options": [
-      "Create table",
-      "Drop table",
-      "Alter table",
-      "Update",
-      "Insert"
-    ],
+    "options": ["Create table", "Drop table", "Alter table", "Update", "Insert"],
     "answer": "Alter table"
   },
   {
     "id": 105,
     "question": "Query-query yang digunakan untuk mendefinisikan struktur atau skema basis data disebut:",
-    "options": [
-      "DDL",
-      "Alter Table",
-      "Data access",
-      "Data integrity",
-      "Auxiliary"
-    ],
+    "options": ["DDL", "Alter Table", "Data access", "Data integrity", "Auxiliary"],
     "answer": "DDL"
   },
   {
