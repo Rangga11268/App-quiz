@@ -1,5 +1,9 @@
 Aplikasi web kuis interaktif yang dirancang untuk membantu mahasiswa berlatih menghadapi Ujian Akhir Semester (UAS) dalam mata kuliah Konsep Basis Data. Aplikasi ini menyajikan berbagai paket soal dengan batas waktu, penilaian otomatis, dan fitur untuk meninjau kembali jawaban.
 
+## 🚀 Live Demo
+
+Coba aplikasinya langsung di sini: **[superlative-pothos-2638e8.netlify.app](https://superlative-pothos-2638e8.netlify.app/)**
+
 ## ✨ Fitur Utama
 
   - **Beberapa Mode Latihan**: Pengguna dapat memilih dari berbagai paket soal yang telah ditentukan, termasuk "Paket A", "Paket B", "Paket P15", "Paket 1", "Paket 2", atau mengacak semua 183 soal yang tersedia.
@@ -11,14 +15,6 @@ Aplikasi web kuis interaktif yang dirancang untuk membantu mahasiswa berlatih me
   - **Ulangi Soal Salah**: Terdapat fitur khusus untuk mengulang latihan hanya pada soal-soal yang sebelumnya dijawab salah, memungkinkan pembelajaran yang lebih fokus.
   - **Histori Latihan**: Aplikasi menyimpan riwayat 20 sesi latihan terakhir, lengkap dengan nama paket, skor, persentase, dan tanggal pengerjaan.
   - **Desain Responsif**: Antarmuka yang modern dan ramah pengguna, dibangun dengan TailwindCSS agar nyaman diakses melalui perangkat desktop maupun mobile.
-
-## 🚀 Cara Menjalankan
-
-Proyek ini adalah aplikasi web statis. Anda tidak memerlukan proses *build* atau instalasi yang rumit.
-
-1.  Pastikan Anda memiliki file `index.html`, `style.css`, `script.js`, dan folder `public` yang berisi `questions.json` dalam satu direktori.
-2.  Buka file `index.html` langsung di browser web pilihan Anda (misalnya, Google Chrome, Mozilla Firefox).
-3.  Aplikasi kuis siap digunakan.
 
 ## 💻 Tumpukan Teknologi
 
@@ -39,15 +35,6 @@ Proyek ini adalah aplikasi web statis. Anda tidak memerlukan proses *build* atau
     └── questions.json  # Basis data semua soal dan jawaban kuis
 ```
 
-## 🖼️ Tangkapan Layar
-
-*(Anda dapat menambahkan tangkapan layar dari aplikasi Anda di sini untuk menunjukkan berbagai tampilan, seperti menu utama, pemilihan paket, layar kuis, dan halaman hasil.)*
-
-1.  **Tampilan Awal**
-2.  **Pemilihan Paket Soal**
-3.  **Sesi Pengerjaan Kuis**
-4.  **Halaman Hasil & Pembahasan**
-
 ## 👤 Kredit
 
-Dibuat oleh **Darell Rangga**.
+Dibuat Oleh Darell Rangga.
